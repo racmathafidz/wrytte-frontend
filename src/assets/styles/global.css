@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+p {
+  white-space: pre-wrap;
+} 
+
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+h2 {
+  display: block;
+  font-size: 1.5em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+h4 {
+  display: block;
+  font-size: 1em;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+h5 {
+  display: block;
+  font-size: .83em;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+h6 {
+  display: block;
+  font-size: .67em;
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.signin-or:before,
+.signin-or:after {
+  content: "";
+  position: absolute;
+  background-color: #D1D5DB;
+  width: 127px;
+  height: 1px;
+  bottom: 57.7%;
+}
+
+.signin-or:before {
+  left: 40px;
+}
+
+.signin-or:after {
+  left: 230px;
+}
+
+.signup-or:before,
+.signup-or:after {
+  content: "";
+  position: absolute;
+  background-color: #D1D5DB;
+  width: 275px;
+  height: 1px;
+  bottom: 57.7%;
+}
+
+.signup-or:before {
+  right: 364px;
+}
+
+.signup-or:after {
+  right: 42px;
+}
+
+.auth-label {
+  @apply font-sans font-light text-lg text-gray-900;
+}
+
+.auth-form {
+  @apply w-full border border-gray-400 rounded-lg py-2 px-3 font-sans font-light text-gray-800 mt-1 focus:outline-none focus:ring-1 focus:ring-gray-400;  
+}
+
+.auth-button {
+  @apply w-full bg-black text-gray-100 mt-3 py-3 shadow-lg rounded-full cursor-pointer transform transition duration-300 hover:shadow-2xl;
+}
+
+.auth-error {
+  @apply flex text-sm text-white bg-red-500 p-1 rounded mb-3;
+}
+
+.editor-class {
+  border: 1px solid #f1f1f1;
+  border-radius: 0.25rem;
+  padding: 0px 10px;
+}
+
