@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-unused-vars */
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import LandingPage from './pages/LandingPage';
+import ArticlePage from './pages/ArticlePage';
+import ProfilePage from './pages/ProfilePage';
+import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
+import WritePostPage from './pages/WritePostPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/blog" component={ArticlePage} />
+      <Route exact path="/profile" component={ProfilePage} />
+      <Route exact path="/signin" component={SignInPage} />
+      <Route exact path="/signup" component={SignUpPage} />
+      <Route exact path="/write" component={WritePostPage} />
+    </Switch>
   );
 }
 
