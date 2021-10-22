@@ -4,8 +4,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
 
-import BrandIcon from '../components/BrandIcon';
-import GoogleButton from '../components/GoogleButton';
+import BrandIcon from '../components/BrandIcon/BrandIcon';
+import GoogleButton from '../components/GoogleButton/GoogleButton';
 import SignUp from '../assets/images/signup.png';
 
 export default function SignUpPage() {

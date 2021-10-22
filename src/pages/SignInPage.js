@@ -5,8 +5,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
 
-import BrandIcon from '../components/BrandIcon';
-import GoogleButton from '../components/GoogleButton';
+import BrandIcon from '../components/BrandIcon/BrandIcon';
+import GoogleButton from '../components/GoogleButton/GoogleButton';
 import SignIn from '../assets/images/signin.png';
 
 export default function SignInPage() {
@@ -66,7 +66,7 @@ export default function SignInPage() {
         </div>
       </div>
       <div className="w-4/6 bg-gray-700">
-        <img src={SignIn} alt="Sign In" />
+        <img src={SignIn} alt="Sign In" className="h-screen object-scale-down" />
       </div>
     </div>
   );
