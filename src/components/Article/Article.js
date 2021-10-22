@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import LazyLoad from 'react-lazyload';
 import {
   FacebookShareButton, TwitterShareButton, LinkedinShareButton, WhatsappShareButton, FacebookIcon, TwitterIcon, LinkedinIcon, WhatsappIcon,
 } from 'react-share';
@@ -20,11 +21,13 @@ export default function Article(props) {
           <NavLink
             to={`/${article.authorData.userName}`}
           >
-            <img
-              src={`${process.env.REACT_APP_BASE_URL}/${article.authorData.imageProfile}`}
-              alt="Author"
-              className="h-8 mr-2 rounded-full"
-            />
+            <LazyLoad>
+              <img
+                src={`${process.env.REACT_APP_BASE_URL}/${article.authorData.imageProfile}`}
+                alt="Author"
+                className="h-8 mr-2 rounded-full"
+              />
+            </LazyLoad>
           </NavLink>
           <NavLink
             to={`/${article.authorData.userName}`}
@@ -37,7 +40,9 @@ export default function Article(props) {
           <p className="px-1 font-sans font-light text-lg">·</p>
           <p className="font-sans font-light text-lg">{dateFormatter(article.publishDate)}</p>
         </div>
-        <img src={`${process.env.REACT_APP_BASE_URL}/${article.imageCover}`} alt="Article Illustration" className="my-9" />
+        <LazyLoad>
+          <img src={`${process.env.REACT_APP_BASE_URL}/${article.imageCover}`} alt="Article Illustration" className="my-9" />
+        </LazyLoad>
         <p className="font-serif font-light text-lg text-justify leading-normal text-gray-900">{article.articleBody}</p>
         <div className="grid grid-cols-2 gap-4 my-9">
           <div className="border border-gray-400 py-4 px-6 rounded-lg">
@@ -46,11 +51,13 @@ export default function Article(props) {
               <NavLink
                 to={`/${article.authorData.userName}`}
               >
-                <img
-                  src={`${process.env.REACT_APP_BASE_URL}/${article.authorData.imageProfile}`}
-                  alt="Author"
-                  className="h-16 mr-4 rounded-full"
-                />
+                <LazyLoad>
+                  <img
+                    src={`${process.env.REACT_APP_BASE_URL}/${article.authorData.imageProfile}`}
+                    alt="Author"
+                    className="h-16 mr-4 rounded-full"
+                  />
+                </LazyLoad>
               </NavLink>
               <NavLink
                 to={`/${article.authorData.userName}`}

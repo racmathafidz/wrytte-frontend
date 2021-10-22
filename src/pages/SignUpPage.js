@@ -3,6 +3,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
+import LazyLoad from 'react-lazyload';
 
 import BrandIcon from '../components/BrandIcon/BrandIcon';
 import GoogleButton from '../components/GoogleButton/GoogleButton';
@@ -21,7 +22,9 @@ export default function SignUpPage() {
   return (
     <div className="flex flex-row">
       <div className="w-1/2 bg-gray-700">
-        <img src={SignUp} alt="Sign Up" className="h-screen object-scale-down" />
+        <LazyLoad>
+          <img src={SignUp} alt="Sign Up" className="h-screen object-scale-down" />
+        </LazyLoad>
       </div>
       <div className="w-1/2 py-11 px-10 flex flex-col">
         <div className="inline-flex">

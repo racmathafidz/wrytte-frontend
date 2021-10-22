@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import LazyLoad from 'react-lazyload';
 
 import HeroImage from '../../assets/images/hero-image.png';
 
@@ -15,7 +16,9 @@ export default function Hero() {
         </NavLink>
       </div>
       <div className="w-2/5">
-        <img src={HeroImage} alt="Hero" className="object-scale-down" />
+        <LazyLoad>
+          <img src={HeroImage} alt="Hero" className="object-scale-down" />
+        </LazyLoad>
       </div>
     </div>
   );
