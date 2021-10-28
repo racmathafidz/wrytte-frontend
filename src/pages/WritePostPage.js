@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
@@ -13,7 +14,9 @@ import DOMPurify from 'dompurify';
 import Toolbar from '../utils/toolbar';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-export default function WritePostPage() {
+export default function WritePostPage(props) {
+  const { userData } = props;
+  const history = useHistory();
   const [selectedImage, setSelectedImage] = useState();
   const [convertedContent, setConvertedContent] = useState(null);
   const [editorState, setEditorState] = useState(
@@ -48,6 +51,11 @@ export default function WritePostPage() {
     console.log(selectedImage);
     console.log(data);
   }
+  useEffect(() => {
+    if (!userData) {
+      history.push('/signup');
+    }
+  }, []);
 
   return (
     <div className="container mx-auto px-52 flex flex-col pt-20 pb-8 font-serif">
