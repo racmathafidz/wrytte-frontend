@@ -11,7 +11,7 @@ export default function Hero() {
       <div className="w-3/5">
         <p className="font-serif text-6xl">Everyone can write and read in Wrytte.</p>
         <p className="font-sans font-light text-lg mt-4 mb-8">Easy and free to find and make great article and connect with millions of people in Wrytte.</p>
-        <NavLink to="/signup" className="font-sans font-light text-lg text-gray-100 py-2 px-4 bg-black rounded-full transform transition duration-300 hover:text-white hover:bg-gray-900">
+        <NavLink to="/write" className="font-sans font-light text-lg text-gray-100 py-2 px-4 bg-black rounded-full transform transition duration-300 hover:text-white hover:bg-gray-900">
           Start Writing
         </NavLink>
       </div>
