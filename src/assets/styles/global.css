@@ -118,6 +118,10 @@ h6 {
   @apply flex text-sm text-white bg-red-500 p-1 rounded mb-3;
 }
 
+.auth-failed {
+  @apply flex text-sm text-white bg-red-500 py-1 px-4 rounded-full;
+}
+
 .editor-class {
   border: 1px solid #f1f1f1;
   border-radius: 0.25rem;
