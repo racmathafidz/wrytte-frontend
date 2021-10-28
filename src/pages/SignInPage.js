@@ -1,23 +1,36 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import BrandIcon from '../components/BrandIcon/BrandIcon';
 import GoogleButton from '../components/GoogleButton/GoogleButton';
 import SignIn from '../assets/images/signin.png';
 
-export default function SignInPage() {
+export default function SignInPage(props) {
+  const { signInLocal, userData, signInResponse, setSignInResponse } = props;
+  const history = useHistory();
   const { register, handleSubmit, formState: { errors } } = useForm();
   console.log(errors);
   function signInHandler(data) {
-    console.log(data);
+    signInLocal(data.email, data.password);
   }
   function googleSignInHandler() {
     console.log('Google Sign In');
   }
+
+  useEffect(() => {
+    if (userData) {
+      history.push(`/${userData.userName}`);
+    }
+    return () => {
+      setSignInResponse(null);
+    };
+  }, [userData]);
 
   return (
     <div className="flex flex-row">
@@ -58,6 +71,7 @@ export default function SignInPage() {
             </label>
             <input type="submit" value="Sign In" className="auth-button" />
           </form>
+          { signInResponse && (<span className="auth-failed mt-2">{signInResponse}</span>) }
           <p className="font-sans font-light text-center text-gray-900 mt-5">
             Don't have an account?
             {' '}

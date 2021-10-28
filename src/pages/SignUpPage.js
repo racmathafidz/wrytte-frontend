@@ -1,23 +1,36 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 
 import BrandIcon from '../components/BrandIcon/BrandIcon';
 import GoogleButton from '../components/GoogleButton/GoogleButton';
 import SignUp from '../assets/images/signup.png';
 
-export default function SignUpPage() {
+export default function SignUpPage(props) {
+  const { signUpLocal, userData, signUpResponse, setSignUpResponse } = props;
+  const history = useHistory();
   const { register, handleSubmit, formState: { errors } } = useForm();
   console.log(errors);
   function signUpHandler(data) {
-    console.log(data);
+    signUpLocal(data.email, data.password, data.firstName, data.lastName);
   }
   function googleSignUpHandler() {
     console.log('Google Sign Up');
   }
+
+  useEffect(() => {
+    if (userData) {
+      history.push(`/${userData.userName}`);
+    }
+    return () => {
+      setSignUpResponse(null);
+    };
+  }, [userData]);
 
   return (
     <div className="flex flex-row">
@@ -105,6 +118,7 @@ export default function SignUpPage() {
                 <NavLink to="/signin" className="text-blue-900">Sign In</NavLink>
               </p>
             </div>
+            { signUpResponse && (<span className="auth-failed">{signUpResponse}</span>) }
           </div>
         </form>
       </div>
