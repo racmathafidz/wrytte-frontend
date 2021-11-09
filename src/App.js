@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-use-before-define */
@@ -9,6 +10,8 @@ import {
   BrowserRouter as Router, Route, Switch, Redirect,
 } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import LandingPage from './pages/LandingPage';
 import ArticlePage from './pages/ArticlePage';
@@ -17,12 +20,16 @@ import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import WritePostPage from './pages/WritePostPage';
 import LoadingPage from './pages/LoadingPage';
+import SettingsPage from './pages/SettingsPage';
+import { ActionCreators } from './redux/actions';
+import encrypt from './utils/encrypt';
 
 export const AuthContext = React.createContext();
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
-  const [userData, setUserData] = useState(null);
+  const dispatch = useDispatch();
+  const { SignInAction, SignOutAction } = bindActionCreators(ActionCreators, dispatch);
+
   const [signUpResponse, setSignUpResponse] = useState();
   const [signInResponse, setSignInResponse] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -30,6 +37,46 @@ function App() {
   function capitalize(string) {
     const lower = string.toLowerCase();
     return string.charAt(0).toUpperCase() + lower.slice(1);
+  }
+
+  function AuthGoogle(googleData) {
+    axios({
+      method: 'POST',
+      data: {
+        token: googleData.tokenId,
+      },
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/auth/google`,
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+      const payload = {
+        id: response.data.id,
+        email: response.data.email,
+        fullName: response.data.fullName,
+        userName: response.data.userName,
+        imageProfile: response.data.imageProfile,
+        google: response.data.google,
+      };
+      console.log(encrypt(payload));
+      SignInAction({
+        userData: encrypt(payload),
+      });
+    });
+  }
+
+  function getGoogleUser() {
+    console.log('Get User');
+    axios({
+      method: 'GET',
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/auth/google/user`,
+    }).then((response) => {
+      setUserData(response.data);
+    });
   }
 
   function signUpLocal(email, password, firstName, lastName) {
@@ -45,8 +92,7 @@ function App() {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/auth/local/signup`,
     }).then((response) => {
-      console.log('Sign Up');
-      console.log(response);
+      setIsLoading(false);
       if (response.data.msg === 'User with That Email Already Exist.') {
         setSignUpResponse(response.data.msg);
         setIsLoading(false);
@@ -66,28 +112,45 @@ function App() {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/auth/local/signin`,
     }).then((response) => {
-      console.log('Sign In');
-      console.log(response);
+      setIsLoading(false);
       if (response.data.msg) {
         setSignInResponse(response.data.msg);
-        setIsLoading(false);
       }
       if (response.data.email) {
-        setUserData(response.data);
-        setIsAuth(true);
-        setIsLoading(false);
+        const payload = {
+          id: response.data.id,
+          email: response.data.email,
+          fullName: response.data.fullName,
+          userName: response.data.userName,
+          imageProfile: response.data.imageProfile,
+          google: response.data.google,
+        };
+        console.log(encrypt(payload));
+        SignInAction({
+          userData: encrypt(payload),
+        });
       }
     });
   }
 
   function signOut() {
+    SignOutAction();
+    // Local signout and delete cookie
     axios({
       method: 'GET',
       withCredentials: true,
-      url: `${process.env.REACT_APP_BASE_URL}/auth/signout`,
+      url: `${process.env.REACT_APP_BASE_URL}/auth/local/signout`,
     }).then(() => {
-      setIsAuth(false);
-      setUserData(null);
+      setUserData();
+    });
+    document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    // Google signout
+    axios({
+      method: 'GET',
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/auth/google/signout`,
+    }).then(() => {
+      setUserData();
     });
   }
 
@@ -98,12 +161,13 @@ function App() {
   }
 
   return (
-    <AuthContext.Provider value={{ isAuth, userData, signOut }}>
+    <AuthContext.Provider value={{ signOut }}>
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/signin" render={(props) => <SignInPage {...props} signInLocal={signInLocal} userData={userData} signInResponse={signInResponse} setSignInResponse={setSignInResponse} />} />
-        <Route exact path="/signup" render={(props) => <SignUpPage {...props} signUpLocal={signUpLocal} userData={userData} signUpResponse={signUpResponse} setSignUpResponse={setSignUpResponse} />} />
-        <Route exact path="/write" render={(props) => <WritePostPage {...props} userData={userData} />} />
+        <Route exact path="/signin" render={(props) => <SignInPage {...props} AuthGoogle={AuthGoogle} signInLocal={signInLocal} signInResponse={signInResponse} setSignInResponse={setSignInResponse} />} />
+        <Route exact path="/signup" render={(props) => <SignUpPage {...props} AuthGoogle={AuthGoogle} signUpLocal={signUpLocal} signUpResponse={signUpResponse} setSignUpResponse={setSignUpResponse} />} />
+        <Route exact path="/settings" component={SettingsPage} />
+        <Route exact path="/write" component={WritePostPage} />
         {/* Put the path with params on the bottom. */}
         <Route exact path="/:userName" component={ProfilePage} />
         <Route exact path="/article/:articleTitle" component={ArticlePage} />
