@@ -9,7 +9,9 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      ringColor: ['hover', 'active'],
+    },
   },
   plugins: [],
 };

@@ -106,7 +106,15 @@ h6 {
   @apply font-sans font-light text-lg text-gray-900;
 }
 
+.setting-label {
+  @apply font-sans font-light text-2xl text-gray-900;
+}
+
 .auth-form {
+  @apply w-full border border-gray-400 rounded-lg py-2 px-3 font-sans font-light text-gray-800 mt-1 focus:outline-none focus:ring-1 focus:ring-gray-400;  
+}
+
+.setting-form {
   @apply w-full border border-gray-400 rounded-lg py-2 px-3 font-sans font-light text-gray-800 mt-1 focus:outline-none focus:ring-1 focus:ring-gray-400;  
 }
 
