@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-shadow */
 /* eslint-disable object-curly-newline */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-bind */
@@ -6,31 +8,38 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink, useHistory } from 'react-router-dom';
+import GoogleLogin from 'react-google-login';
+import { useSelector } from 'react-redux';
 
 import BrandIcon from '../components/BrandIcon/BrandIcon';
 import GoogleButton from '../components/GoogleButton/GoogleButton';
 import SignIn from '../assets/images/signin.png';
+import decrypt from '../utils/decrypt';
 
 export default function SignInPage(props) {
-  const { signInLocal, userData, signInResponse, setSignInResponse } = props;
+  const { AuthGoogle, signInLocal, signInResponse, setSignInResponse } = props;
+  const encryptedState = useSelector((state) => state);
+  const userDataState = encryptedState.UserData.userData ? decrypt(encryptedState.UserData.userData) : encryptedState.UserData;
   const history = useHistory();
   const { register, handleSubmit, formState: { errors } } = useForm();
   console.log(errors);
+
   function signInHandler(data) {
     signInLocal(data.email, data.password);
   }
-  function googleSignInHandler() {
-    console.log('Google Sign In');
+
+  function googleSignInHandler(googleData) {
+    AuthGoogle(googleData);
   }
 
   useEffect(() => {
-    if (userData) {
-      history.push(`/${userData.userName}`);
+    if (userDataState.userName) {
+      history.push(`/${userDataState.userName}`);
     }
     return () => {
       setSignInResponse(null);
     };
-  }, [userData]);
+  }, [userDataState]);
 
   return (
     <div className="flex flex-row">
@@ -40,7 +49,16 @@ export default function SignInPage(props) {
         </div>
         <p className="font-sans font-light text-3xl text-gray-900 mt-10 mb-8">Sign In To Your Account</p>
         <div className="pr-24 flex flex-col">
-          <GoogleButton googleButtonHandler={googleSignInHandler} />
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+            render={(renderProps) => (
+              <GoogleButton onClick={renderProps.onClick} />
+            )}
+            buttonText="Continue with Google"
+            onSuccess={googleSignInHandler}
+            onFailure={googleSignInHandler}
+            cookiePolicy="single_host_origin"
+          />
           <p className="signin-or font-sans font-light text-md text-gray-900 text-center my-8">OR</p>
           <form onSubmit={handleSubmit(signInHandler)}>
             <label htmlFor="email" className="auth-label">
