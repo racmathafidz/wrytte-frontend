@@ -6,38 +6,28 @@ import UserProfile from '../UserProfile';
 
 const dummyData = {
   profileData: {
-    local: {
-      password: '',
-    },
-    google: {
-      googleId: 'skdfsjfksjfskf',
-    },
     _id: '987654321',
     email: 'user@gmail.com',
     fullName: 'Full Name',
     userName: 'user.name',
-    imageProfile: 'assets/images/user2.jpg',
+    imageProfile: 'https://res.cloudinary.com/racmathafidz/image/upload/v1636354656/iqtuia9ofzj7wgseltrk.jpg',
+    password: 'skdfsjfksjfskf',
   },
   articleData: [
     {
       _id: '123456789',
-      imageCover: 'assets/images/Freelance.png',
+      imageCover: 'https://res.cloudinary.com/racmathafidz/image/upload/v1636344459/Freelance_mkzq2b.png',
       articleTitle: 'Article Title',
       articleBody: 'Article Body',
       publishDate: '2021-10-01T17:00:00.000Z',
       authorId: '987654321',
       authorData: {
-        local: {
-          password: '',
-        },
-        google: {
-          googleId: 'skdfsjfksjfskf',
-        },
         _id: '987654321',
         email: 'user@gmail.com',
         fullName: 'Full Name',
         userName: 'user.name',
-        imageProfile: 'assets/images/user2.jpg',
+        imageProfile: 'https://res.cloudinary.com/racmathafidz/image/upload/v1636354656/iqtuia9ofzj7wgseltrk.jpg',
+        password: 'skdfsjfksjfskf',
       },
     },
   ],
@@ -48,14 +38,6 @@ const MockUserProfile = ({ data }) => (
     <UserProfile profileData={data} />
   </BrowserRouter>
 );
-
-test('User Profile should render img', async () => {
-  render(<MockUserProfile data={dummyData} />);
-
-  const imgElement = screen.getAllByRole('img');
-
-  expect(imgElement).toHaveLength(3);
-});
 
 test('User Profile should render author`s full name', async () => {
   render(<MockUserProfile data={dummyData} />);

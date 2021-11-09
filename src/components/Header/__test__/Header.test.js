@@ -1,12 +1,24 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
+import { useContext } from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../../../redux/store';
+import { AuthContext } from '../../../App';
 import Header from '../Header';
 
-// Using 'mock' because there's a NavLink inside the header component
+// Mock function
+const signOut = jest.fn();
+
+// Using 'mock' because there's a redux store inside the header component
 const MockHeader = () => (
   <BrowserRouter>
-    <Header />
+    <Provider store={store}>
+      <AuthContext.Provider value={{ signOut }}>
+        <Header />
+      </AuthContext.Provider>
+    </Provider>
   </BrowserRouter>
 );
 
