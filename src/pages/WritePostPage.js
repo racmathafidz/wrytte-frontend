@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 /* eslint-disable react/jsx-no-bind */
@@ -10,12 +12,15 @@ import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
+import { useSelector } from 'react-redux';
 
 import Toolbar from '../utils/toolbar';
+import decrypt from '../utils/decrypt';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-export default function WritePostPage(props) {
-  const { userData } = props;
+export default function WritePostPage() {
+  const encryptedState = useSelector((state) => state);
+  const userDataState = encryptedState.UserData.userData ? decrypt(encryptedState.UserData.userData) : encryptedState.UserData;
   const history = useHistory();
   const [selectedImage, setSelectedImage] = useState();
   const [convertedContent, setConvertedContent] = useState(null);
@@ -25,34 +30,41 @@ export default function WritePostPage(props) {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const imageCoverRegister = register('imageCover', { required: true });
   console.log(errors);
+
   function imageChange(event) {
     if (event.target.files && event.target.files.length > 0) {
       setSelectedImage(event.target.files[0]);
     }
   }
+
   function removeImage() {
     setSelectedImage();
   }
+
   function convertContentToHTML() {
     const currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
     setConvertedContent(currentContentAsHTML);
   }
+
   function handleEditorChange(state) {
     setEditorState(state);
     convertContentToHTML();
   }
+
   // Editor preview
   // function createMarkup(html) {
   //   return {
   //     __html: DOMPurify.sanitize(html),
   //   };
   // }
+
   function postHandler(data) {
     console.log(selectedImage);
     console.log(data);
   }
+
   useEffect(() => {
-    if (!userData) {
+    if (!userDataState.userName) {
       history.push('/signup');
     }
   }, []);
