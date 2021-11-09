@@ -1,33 +1,83 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
+/* eslint-disable no-shadow */
 /* eslint-disable import/no-cycle */
-import React, { useContext } from 'react';
+import React, {
+  useState, useContext, useRef, useEffect,
+} from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { AuthContext } from '../../App';
 import BrandIcon from '../BrandIcon/BrandIcon';
+import decrypt from '../../utils/decrypt';
 
 export default function Header() {
-  const { userData, signOut } = useContext(AuthContext);
+  const encryptedState = useSelector((state) => state);
+  const userDataState = encryptedState.UserData.userData ? decrypt(encryptedState.UserData.userData) : encryptedState.UserData;
+  const { signOut } = useContext(AuthContext);
+  const [isPopperShow, setIsPopperShow] = useState(false);
+  const popperRef = useRef(null);
+  clickOutsidePopperHandler(popperRef);
+
+  function clickOutsidePopperHandler(ref) {
+    useEffect(() => {
+      // Handle click outside the ref
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setIsPopperShow(false);
+        }
+      }
+
+      // Bind the event listener
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [ref]);
+  }
+
+  function popperHandler() {
+    setIsPopperShow(!isPopperShow);
+  }
 
   function signOutHandler() {
     signOut();
   }
 
-  if (userData) {
+  if (userDataState.userName) {
     return (
       <header className="container mx-auto flex flex-row w-full items-center justify-between py-6 px-4 border-b border-gray-300">
         <BrandIcon />
 
-        <div className="flex flex-row items-center">
-          <button type="button" onClick={signOutHandler} className="font-sans font-light text-lg mx-3 leading-loose hover:underline">
-            Sign Out
-          </button>
-          <NavLink to={`/${userData.userName}`}>
-            <img
-              src={`${process.env.REACT_APP_BASE_URL}/${userData.imageProfile}`}
-              alt="User Profile"
-              className="h-9 mx-3 rounded-full"
-            />
-          </NavLink>
+        <div className="flex flex-col" ref={popperRef}>
+          <div className="flex flex-row items-center">
+            <NavLink to="/write" className="font-sans font-light text-lg text-black py-1 px-4 mr-1 rounded-full transform transition duration-300 ring-1 ring-gray-600 hover:ring-1 hover:ring-black">
+              Start Writing
+            </NavLink>
+            <button type="button" onClick={popperHandler}>
+              <img
+                src={`${userDataState.imageProfile}`}
+                alt="User Profile"
+                className="h-9 w-9 object-cover mx-3 rounded-full"
+              />
+            </button>
+          </div>
+          <div
+            className={`${isPopperShow ? 'flex flex-col' : 'hidden'} right-16 mt-12 px-7 py-4 ring-1 ring-gray-400 bg-white rounded-md absolute`}
+          >
+            <NavLink to={`/${userDataState.userName}`} className="mb-2 font-sans font-light text-md text-black">
+              {userDataState.fullName}
+            </NavLink>
+            <NavLink to="/settings" className="mb-2 font-sans font-light text-md text-black">
+              Settings
+            </NavLink>
+            <button type="button" onClick={signOutHandler} className="font-sans font-light text-md text-black text-left">
+              Sign Out
+            </button>
+          </div>
         </div>
       </header>
     );
