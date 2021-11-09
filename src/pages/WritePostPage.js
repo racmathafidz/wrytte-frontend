@@ -63,6 +63,10 @@ export default function WritePostPage() {
     console.log(data);
   }
 
+  function goBack() {
+    history.goBack();
+  }
+
   useEffect(() => {
     if (!userDataState.userName) {
       history.push('/signup');
@@ -116,7 +120,7 @@ export default function WritePostPage() {
         {/* <div className="preview" dangerouslySetInnerHTML={createMarkup(convertedContent)} /> */}
         <div className="flex flex-row-reverse items-center mt-4">
           <input type="submit" value="Publish" className="cursor-pointer py-2 px-6 bg-black text-gray-100 rounded-lg transform transition duration-300 hover:text-white hover:bg-gray-900" />
-          <NavLink to="/" className="mr-4 text-gray-700">Cancel</NavLink>
+          <button type="button" className="mr-4 text-gray-700" onClick={goBack}>Cancel</button>
         </div>
       </form>
     </div>
