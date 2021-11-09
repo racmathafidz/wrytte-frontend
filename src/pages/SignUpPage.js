@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-shadow */
 /* eslint-disable object-curly-newline */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-bind */
@@ -6,31 +8,38 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink, useHistory } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
+import GoogleLogin from 'react-google-login';
+import { useSelector } from 'react-redux';
 
 import BrandIcon from '../components/BrandIcon/BrandIcon';
 import GoogleButton from '../components/GoogleButton/GoogleButton';
 import SignUp from '../assets/images/signup.png';
+import decrypt from '../utils/decrypt';
 
 export default function SignUpPage(props) {
-  const { signUpLocal, userData, signUpResponse, setSignUpResponse } = props;
+  const { AuthGoogle, signUpLocal, signUpResponse, setSignUpResponse } = props;
+  const encryptedState = useSelector((state) => state);
+  const userDataState = encryptedState.UserData.userData ? decrypt(encryptedState.UserData.userData) : encryptedState.UserData;
   const history = useHistory();
   const { register, handleSubmit, formState: { errors } } = useForm();
   console.log(errors);
+
   function signUpHandler(data) {
     signUpLocal(data.email, data.password, data.firstName, data.lastName);
   }
-  function googleSignUpHandler() {
-    console.log('Google Sign Up');
+
+  function googleSignUpHandler(googleData) {
+    AuthGoogle(googleData);
   }
 
   useEffect(() => {
-    if (userData) {
-      history.push(`/${userData.userName}`);
+    if (userDataState.userName) {
+      history.push(`/${userDataState.userName}`);
     }
     return () => {
       setSignUpResponse(null);
     };
-  }, [userData]);
+  }, [userDataState]);
 
   return (
     <div className="flex flex-row">
@@ -45,7 +54,16 @@ export default function SignUpPage(props) {
         </div>
         <p className="font-sans font-light text-3xl text-gray-900 mt-10 mb-8">Sign Up and Join Wrytte</p>
         <div className="flex flex-col pr-72">
-          <GoogleButton googleButtonHandler={googleSignUpHandler} />
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+            render={(renderProps) => (
+              <GoogleButton onClick={renderProps.onClick} />
+            )}
+            buttonText="Continue with Google"
+            onSuccess={googleSignUpHandler}
+            onFailure={googleSignUpHandler}
+            cookiePolicy="single_host_origin"
+          />
         </div>
         <p className="signup-or font-sans font-light text-md text-gray-900 text-center my-8">OR</p>
         <form onSubmit={handleSubmit(signUpHandler)}>
