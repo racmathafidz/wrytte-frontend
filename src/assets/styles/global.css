@@ -6,6 +6,20 @@ p {
   white-space: pre-wrap;
 } 
 
+strong {
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: initial;
+  list-style-position: inside;
+}
+
+ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
 h1 {
   display: block;
   font-size: 2em;
@@ -130,9 +144,12 @@ h6 {
   @apply flex text-sm text-white bg-red-500 py-1 px-4 rounded-full;
 }
 
-.editor-class {
-  border: 1px solid #f1f1f1;
+.wrapper-class {
+  border: 1px solid #9CA3AF;
   border-radius: 0.25rem;
-  padding: 0px 10px;
 }
 
+.editor-class {
+  border-top: 1px solid #9CA3AF;
+  padding: 0px 10px;
+}
