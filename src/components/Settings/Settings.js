@@ -32,9 +32,9 @@ export default function Settings(props) {
 
   function saveHandler(data) {
     if (data.imageProfile.length > 0) {
-      const uploadData = new FormData();
-      uploadData.append('file', selectedImage, 'file');
-      imageUpload(uploadData, data);
+      const uploadImage = new FormData();
+      uploadImage.append('file', selectedImage, 'file');
+      imageUpload(uploadImage, data);
     } else {
       profileUpdate(data, undefined);
     }
@@ -44,26 +44,26 @@ export default function Settings(props) {
     axios({
       method: 'POST',
       data: imageToUpload,
-      url: `${process.env.REACT_APP_BASE_URL}/api/account/image-upload`,
+      url: `${process.env.REACT_APP_BASE_URL}/picture-upload`,
     }).then(async (res) => {
-      profileUpdate(data, res.data.imageProfile);
+      profileUpdate(data, res.data.image);
     });
   }
 
-  function profileUpdate(data, changedImage) {
+  function profileUpdate(data, imageProfile) {
     axios({
       method: 'PUT',
       data: {
         email: data.email,
         fullName: data.fullName,
         userName: data.userName,
-        imageProfile: changedImage,
+        imageProfile,
       },
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/account/${profileData._id}`,
     }).then((response) => {
       const payload = {
-        id: response.data.id,
+        id: response.data._id,
         email: response.data.email,
         fullName: response.data.fullName,
         userName: response.data.userName,
