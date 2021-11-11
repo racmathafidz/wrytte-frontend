@@ -8,6 +8,7 @@ import {
 } from 'react-share';
 
 import dateFormatter from '../../utils/dateFormatter';
+import stringToHtml from '../../utils/stringToHtml';
 import ArticleMapping from '../ArticleMapping/ArticleMapping';
 
 export default function Article(props) {
@@ -44,10 +45,12 @@ export default function Article(props) {
         <LazyLoad>
           <img src={`${article.imageCover}`} alt="Article Illustration" className="my-9 mx-auto" />
         </LazyLoad>
-        <p className="font-serif font-light text-lg text-justify leading-normal text-gray-900">{article.articleBody}</p>
-        <div className="grid grid-cols-2 gap-4 my-9">
-          <div className="border border-gray-400 py-4 px-6 rounded-lg">
-            <p className="text-lg text-gray-900">About The Author</p>
+        <div className="font-serif font-light text-lg text-justify leading-normal text-black">
+          {stringToHtml(article.articleBody)}
+        </div>
+        <div className="grid grid-cols-2 gap-4 my-16">
+          <div className="border border-gray-500 py-4 px-6 rounded-lg">
+            <p className="font-sans font-light text-xl text-black">About The Author</p>
             <div className="flex flex-row items-center mt-4">
               <NavLink
                 to={`/${article.authorData.userName}`}
@@ -69,8 +72,8 @@ export default function Article(props) {
               </NavLink>
             </div>
           </div>
-          <div className="border border-gray-400 py-4 px-6 rounded-lg">
-            <p className="text-lg text-gray-900">Share This Article</p>
+          <div className="border border-gray-500 py-4 px-6 rounded-lg">
+            <p className="font-sans font-light text-xl text-black">Share This Article</p>
             <div className="flex flex-row items-center mt-4">
               <FacebookShareButton url={`${articleUrl}`} className="mr-2">
                 <FacebookIcon size={48} round />
@@ -89,7 +92,7 @@ export default function Article(props) {
         </div>
       </div>
       <div className="container mx-auto px-4">
-        <p className="font-serif text-xl text-gray-900 mb-2">More On Wrytte</p>
+        <p className="font-serif text-xl text-gray-900 mb-4">More On Wrytte</p>
         <ArticleMapping ArticleData={recomendation} Recomendation />
       </div>
     </div>
