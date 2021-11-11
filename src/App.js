@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-shadow */
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/jsx-no-bind */
@@ -54,7 +55,7 @@ function App() {
       },
     }).then((response) => {
       const payload = {
-        id: response.data.id,
+        id: response.data._id,
         email: response.data.email,
         fullName: response.data.fullName,
         userName: response.data.userName,
@@ -118,14 +119,13 @@ function App() {
       }
       if (response.data.email) {
         const payload = {
-          id: response.data.id,
+          id: response.data._id,
           email: response.data.email,
           fullName: response.data.fullName,
           userName: response.data.userName,
           imageProfile: response.data.imageProfile,
           google: response.data.google,
         };
-        console.log(encrypt(payload));
         SignInAction({
           userData: encrypt(payload),
         });
