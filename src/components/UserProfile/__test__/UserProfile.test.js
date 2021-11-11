@@ -2,6 +2,8 @@
 /* eslint-disable react/prop-types */
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../../../redux/store';
 import UserProfile from '../UserProfile';
 
 const dummyData = {
@@ -35,7 +37,9 @@ const dummyData = {
 
 const MockUserProfile = ({ data }) => (
   <BrowserRouter>
-    <UserProfile profileData={data} />
+    <Provider store={store}>
+      <UserProfile profileData={data} />
+    </Provider>
   </BrowserRouter>
 );
 
