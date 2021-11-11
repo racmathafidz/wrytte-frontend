@@ -6,6 +6,8 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import ArticleMapping from '../ArticleMapping';
 
+const dummyFunction = jest.fn();
+
 const dummyData = [{
   _id: '123456789',
   imageCover: 'https://res.cloudinary.com/racmathafidz/image/upload/v1636344459/Freelance_mkzq2b.png',
@@ -23,9 +25,9 @@ const dummyData = [{
   },
 }];
 
-const MockArticleMapping = ({ data, home, recomendation, profile }) => (
+const MockArticleMapping = ({ data, home, recomendation, status }) => (
   <BrowserRouter>
-    <ArticleMapping ArticleData={data} Home={home} Recomendation={recomendation} Profile={profile} />
+    <ArticleMapping ArticleData={data} Home={home} Recomendation={recomendation} Status={status} setForceFetch={dummyFunction} />
   </BrowserRouter>
 );
 
@@ -78,7 +80,7 @@ test('Recomendation`s Article Mapping should render the correct publish date', a
 });
 
 test('Profile`s Article Mapping should render the correct title', async () => {
-  render(<MockArticleMapping data={dummyData} profile recomendation={false} home={false} />);
+  render(<MockArticleMapping data={dummyData} status="OthersProfile" recomendation={false} home={false} />);
 
   const titleElement = screen.getByText(/Article Title/i);
 
@@ -86,7 +88,7 @@ test('Profile`s Article Mapping should render the correct title', async () => {
 });
 
 test('Profile`s Article Mapping should render the correct author`s full name', async () => {
-  render(<MockArticleMapping data={dummyData} profile recomendation={false} home={false} />);
+  render(<MockArticleMapping data={dummyData} status="OthersProfile" recomendation={false} home={false} />);
 
   const fullnameElement = screen.getByText(/Full Name/i);
 
@@ -94,7 +96,7 @@ test('Profile`s Article Mapping should render the correct author`s full name', a
 });
 
 test('Profile`s Article Mapping should render the correct publish date', async () => {
-  render(<MockArticleMapping data={dummyData} profile recomendation={false} home={false} />);
+  render(<MockArticleMapping data={dummyData} status="OthersProfile" recomendation={false} home={false} />);
 
   const dateElement = screen.getByText(/01 Oct 2021/i);
 
