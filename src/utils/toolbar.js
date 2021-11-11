@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-undef */
 const toolbar = {
-  options: ['inline', 'blockType', 'list', 'textAlign', 'link', 'embedded', 'emoji', 'image', 'remove', 'history'],
+  options: ['inline', 'blockType', 'list', 'link', 'embedded', 'emoji', 'image', 'remove', 'history'],
   blockType: {
     inDropdown: true,
     options: ['Normal', 'H1', 'H2', 'H3', 'Blockquote', 'Code'],
