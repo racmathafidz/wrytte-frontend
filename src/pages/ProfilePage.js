@@ -11,17 +11,21 @@ import LoadingPage from './LoadingPage';
 export default function ProfilePage() {
   const { userName } = useParams();
   const [profileData, setProfileData] = useState();
+  const [forceFetch, setForceFetch] = useState(false);
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/api/account/${userName}`)
-      .then((response) => setProfileData(response.data));
-  }, [userName]);
+      .then((response) => {
+        setProfileData(response.data);
+        setForceFetch(false);
+      });
+  }, [userName, forceFetch]);
 
   if (profileData) {
     return (
       <>
         <Header />
-        <UserProfile profileData={profileData} />
+        <UserProfile profileData={profileData} setForceFetch={setForceFetch} />
         <Footer />
       </>
     );
