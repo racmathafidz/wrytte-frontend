@@ -20,6 +20,7 @@ import ProfilePage from './pages/ProfilePage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import WritePostPage from './pages/WritePostPage';
+import EditPostPage from './pages/EditPostPage';
 import LoadingPage from './pages/LoadingPage';
 import SettingsPage from './pages/SettingsPage';
 import { ActionCreators } from './redux/actions';
@@ -62,7 +63,6 @@ function App() {
         imageProfile: response.data.imageProfile,
         google: response.data.google,
       };
-      console.log(encrypt(payload));
       SignInAction({
         userData: encrypt(payload),
       });
@@ -70,7 +70,6 @@ function App() {
   }
 
   function getGoogleUser() {
-    console.log('Get User');
     axios({
       method: 'GET',
       withCredentials: true,
@@ -171,6 +170,7 @@ function App() {
         {/* Put the path with params on the bottom. */}
         <Route exact path="/:userName" component={ProfilePage} />
         <Route exact path="/article/:articleTitle" component={ArticlePage} />
+        <Route exact path="/edit/:articleTitle" component={EditPostPage} />
         <Redirect from="/article" to="/" />
       </Switch>
     </AuthContext.Provider>
