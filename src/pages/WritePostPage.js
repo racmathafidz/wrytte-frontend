@@ -19,7 +19,7 @@ import axios from 'axios';
 
 import Toolbar from '../utils/toolbar';
 import decrypt from '../utils/decrypt';
-import dashToSpace from '../utils/dashToSpace';
+import urlTitle from '../utils/urlTitle';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 export default function WritePostPage() {
@@ -63,10 +63,6 @@ export default function WritePostPage() {
   //   };
   // }
 
-  function urlTitle(string) {
-    return string.replace(/\s+/g, '-').toLowerCase();
-  }
-
   function publishHandler(data) {
     setIsPublishing(true);
     const uploadImage = new FormData();
@@ -80,17 +76,18 @@ export default function WritePostPage() {
       data: uploadImage,
       url: `${process.env.REACT_APP_BASE_URL}/picture-upload`,
     }).then(async (res) => {
-      profileArticle(data, res.data.image);
+      publishArticle(data, res.data.image);
     });
   }
 
-  function profileArticle(data, imageCover) {
+  function publishArticle(data, imageCover) {
+    const articleBody = convertedContent === null ? '<p></p>' : convertedContent;
     axios({
       method: 'POST',
       data: {
         imageCover,
         articleTitle: data.title,
-        articleBody: convertedContent,
+        articleBody,
         authorId: userDataState.id,
         authorData: userDataState.id,
       },
@@ -108,6 +105,7 @@ export default function WritePostPage() {
   }
 
   useEffect(() => {
+    document.title = 'Write | Wrytte';
     if (!userDataState.userName) {
       history.push('/signup');
     }

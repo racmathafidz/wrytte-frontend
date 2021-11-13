@@ -8,6 +8,7 @@ import LazyLoad from 'react-lazyload';
 import axios from 'axios';
 
 import dateFormatter from '../../utils/dateFormatter';
+import urlTitle from '../../utils/urlTitle';
 
 export default function OwnProfileArticleMapping(props) {
   const { items, index, setForceFetch } = props;
@@ -33,10 +34,6 @@ export default function OwnProfileArticleMapping(props) {
     }, [ref]);
   }
 
-  function urlTitle(string) {
-    return string.replace(/\s+/g, '-').toLowerCase();
-  }
-
   function popperHandler() {
     setIsPopperShow(!isPopperShow);
   }
@@ -46,12 +43,14 @@ export default function OwnProfileArticleMapping(props) {
   }
 
   function deletePost() {
-    console.log(items._id);
     axios({
       method: 'DELETE',
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/article/${items._id}`,
-    }).then((response) => forceUpdate());
+    }).then((response) => {
+      forceUpdate();
+      setIsPopperShow(false);
+    });
   }
 
   return (
@@ -91,7 +90,9 @@ export default function OwnProfileArticleMapping(props) {
           </button>
           <div className={`${isPopperShow ? 'flex flex-col' : 'hidden'} font-sans font-light absolute -ml-9 mt-7 px-3 py-2 bg-white rounded ring-1 ring-gray-400`}>
             <button type="button" className="font-sans font-light mb-1" onClick={deletePost}>Delete</button>
-            <NavLink to="/write">Edit</NavLink>
+            <NavLink to={`/edit/${urlTitle(items.articleTitle)}`}>
+              Edit
+            </NavLink>
           </div>
         </div>
       </div>
