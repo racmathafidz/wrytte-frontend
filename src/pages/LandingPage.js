@@ -13,6 +13,10 @@ export default function LandingPage() {
   const [articleData, setArticleData] = useState();
 
   useEffect(() => {
+    document.title = 'Wrytte';
+  }, []);
+
+  useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/api/article`)
       .then((response) => {
         setArticleData(response.data);

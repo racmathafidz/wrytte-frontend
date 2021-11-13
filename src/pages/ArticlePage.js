@@ -17,6 +17,7 @@ export default function ArticlePage() {
     axios.get(`${process.env.REACT_APP_BASE_URL}/api/article/${articleTitle}`)
       .then((response) => {
         setArticleData(response.data);
+        document.title = `${response.data.articleTitle} | Wrytte`;
       });
   }, [articleTitle]);
 

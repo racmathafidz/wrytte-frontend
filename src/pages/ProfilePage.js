@@ -17,6 +17,7 @@ export default function ProfilePage() {
     axios.get(`${process.env.REACT_APP_BASE_URL}/api/account/${userName}`)
       .then((response) => {
         setProfileData(response.data);
+        document.title = `${response.data.profileData.fullName} | Wrytte`;
         setForceFetch(false);
       });
   }, [userName, forceFetch]);

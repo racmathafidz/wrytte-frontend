@@ -33,6 +33,7 @@ export default function SignInPage(props) {
   }
 
   useEffect(() => {
+    document.title = 'Sign In | Wrytte';
     if (userDataState.userName) {
       history.push(`/${userDataState.userName}`);
     }

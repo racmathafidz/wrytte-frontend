@@ -23,6 +23,7 @@ export default function SettingsPage() {
   }, []);
 
   useEffect(() => {
+    document.title = 'Settings | Wrytte';
     if (!encryptedState.UserData.userData) {
       history.push('/signup');
     }
