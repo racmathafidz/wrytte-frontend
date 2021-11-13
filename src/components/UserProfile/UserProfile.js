@@ -63,15 +63,19 @@ export default function UserProfile(props) {
         Status={profileData.profileData._id === userDataState.id ? 'OwnProfile' : 'OthersProfile'}
         setForceFetch={setForceFetch}
       />
-      <ReactPaginate
-        previousLabel="<"
-        nextLabel=">"
-        breakLabel="..."
-        pageCount={pageAmount}
-        onPageChange={handlePageChange}
-        containerClassName="paginationContainer"
-        activeClassName="paginationActive"
-      />
+      {
+        articleData.length !== 0 && (
+          <ReactPaginate
+            previousLabel="<"
+            nextLabel=">"
+            breakLabel="..."
+            pageCount={pageAmount}
+            onPageChange={handlePageChange}
+            containerClassName="paginationContainer"
+            activeClassName="paginationActive"
+          />
+        )
+      }
     </div>
   );
 }

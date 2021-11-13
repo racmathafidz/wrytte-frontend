@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-shadow */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
@@ -10,18 +11,11 @@ import LazyLoad from 'react-lazyload';
 
 import OwnProfileArticleMapping from '../OwnProfileArticleMapping/OwnProfileArticleMapping';
 import dateFormatter from '../../utils/dateFormatter';
+import urlTitle from '../../utils/urlTitle';
+import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 
 export default function ArticleMapping(props) {
   const { ArticleData, Home, Recomendation, Status, setForceFetch } = props;
-
-  function capitalizeFirstLetter(string) {
-    const arr = string.split(' ').map((items) => items.charAt(0).toUpperCase() + items.slice(1));
-    return arr.join(' ');
-  }
-
-  function urlTitle(string) {
-    return string.replace(/\s+/g, '-').toLowerCase();
-  }
 
   if (Home) {
     return (
@@ -110,6 +104,14 @@ export default function ArticleMapping(props) {
   }
 
   if (Status === 'OthersProfile') {
+    if (ArticleData.length === 0) {
+      return (
+        <div className="w-full py-28">
+          <p className="text-center font-sans font-light text-lg">This user hasn't written any articles yet.</p>
+        </div>
+      );
+    }
+
     return (
       <div className="grid grid-cols-3 gap-7 mt-12 mb-6">
         {
@@ -145,6 +147,17 @@ export default function ArticleMapping(props) {
   }
 
   if (Status === 'OwnProfile') {
+    if (ArticleData.length === 0) {
+      return (
+        <div className="w-full py-24">
+          <p className="text-center font-sans font-light text-lg">Wellcome, you haven't written any articles yet.</p>
+          <NavLink to="/write" className="flex w-full">
+            <p className="mx-auto font-sans font-light text-lg underline">Start Writing</p>
+          </NavLink>
+        </div>
+      );
+    }
+
     return (
       <div className="grid grid-cols-3 gap-7 mt-12 mb-6">
         {

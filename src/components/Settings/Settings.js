@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { ActionCreators } from '../../redux/actions';
+import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 import encrypt from '../../utils/encrypt';
 
 export default function Settings(props) {
@@ -31,6 +32,7 @@ export default function Settings(props) {
   }
 
   function saveHandler(data) {
+    setIsUpdated(false);
     if (data.imageProfile.length > 0) {
       const uploadImage = new FormData();
       uploadImage.append('file', selectedImage, 'file');
@@ -55,7 +57,7 @@ export default function Settings(props) {
       method: 'PUT',
       data: {
         email: data.email,
-        fullName: data.fullName,
+        fullName: capitalizeFirstLetter(data.fullName),
         userName: data.userName,
         imageProfile,
       },
@@ -149,7 +151,12 @@ export default function Settings(props) {
                 data-testid="email"
                 className="setting-form"
                 defaultValue={profileData.email}
-                {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+                {...profileData.password === '' ? 'disabled' : null}
+                {...register('email', {
+                  required: true,
+                  pattern: /^\S+@\S+$/i,
+                  ...(profileData.password === '' && { disabled: true }),
+                })}
               />
             </div>
           </div>
