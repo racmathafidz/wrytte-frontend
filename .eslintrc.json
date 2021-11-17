@@ -27,6 +27,25 @@
     "rules": {
       "react/react-in-jsx-scope": "off",
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-      "no-console": "off"
+      "no-console": "off",
+      "no-underscore-dangle": "off",
+      "no-shadow": "off",
+      "import/no-cycle": "off",
+      "react/jsx-no-bind": "off",
+      "no-use-before-define": "off",
+      "no-undef": "off",
+      "react/jsx-props-no-spreading": "off",
+      "no-unused-vars": "off",
+      "no-param-reassign": "off",
+      "max-len": "off",
+      "react/prop-types": "off",
+      "react/no-danger": "off",
+      "react/no-unescaped-entities": "off",
+      "global-require": "off",
+      "import/no-extraneous-dependencies": "off",
+      "object-curly-newline": "off",
+      "react/no-array-index-key": "off",
+      "import/prefer-default-export": "off",
+      "no-nested-ternary": "off"
     } 
 }

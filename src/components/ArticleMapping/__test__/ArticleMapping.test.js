@@ -1,7 +1,3 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable max-len */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-undef */
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import ArticleMapping from '../ArticleMapping';

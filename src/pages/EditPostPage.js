@@ -1,11 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable no-use-before-define */
-/* eslint-disable max-len */
-/* eslint-disable import/no-cycle */
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
@@ -18,6 +10,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import LoadingPage from './LoadingPage';
+import NotFoundPage from './NotFoundPage';
 import Toolbar from '../utils/toolbar';
 import decrypt from '../utils/decrypt';
 import urlTitle from '../utils/urlTitle';
@@ -140,8 +133,13 @@ export default function EditPostPage() {
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/api/article/${articleTitle}`)
       .then((response) => {
-        setArticleData(response.data);
-        setEditorValue(response.data.articleBody);
+        if (response.data.msg) {
+          setArticleData(null);
+        }
+        if (response.data.articleTitle) {
+          setArticleData(response.data);
+          setEditorValue(response.data.articleBody);
+        }
       });
   }, [articleTitle]);
 
@@ -219,6 +217,12 @@ export default function EditPostPage() {
           </div>
         </form>
       </div>
+    );
+  }
+
+  if (articleData === null) {
+    return (
+      <NotFoundPage />
     );
   }
 

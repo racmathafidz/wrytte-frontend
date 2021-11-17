@@ -1,7 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable max-len */
-/* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 

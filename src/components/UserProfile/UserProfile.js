@@ -1,8 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import LazyLoad from 'react-lazyload';

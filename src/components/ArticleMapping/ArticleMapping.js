@@ -1,10 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable no-shadow */
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-/* eslint-disable object-curly-newline */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
@@ -15,7 +8,9 @@ import urlTitle from '../../utils/urlTitle';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 
 export default function ArticleMapping(props) {
-  const { ArticleData, Home, Recomendation, Status, setForceFetch } = props;
+  const {
+    ArticleData, Home, Recomendation, Status, setForceFetch,
+  } = props;
 
   if (Home) {
     return (

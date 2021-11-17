@@ -1,10 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
-/* eslint-disable object-curly-newline */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink, useHistory } from 'react-router-dom';

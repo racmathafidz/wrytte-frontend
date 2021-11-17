@@ -1,10 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-use-before-define */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
-/* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';

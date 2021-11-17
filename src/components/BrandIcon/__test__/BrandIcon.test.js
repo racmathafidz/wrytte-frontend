@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-undef */
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import BrandIcon from '../BrandIcon';

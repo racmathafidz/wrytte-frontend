@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable import/no-cycle */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';

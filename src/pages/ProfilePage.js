@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -6,6 +5,7 @@ import axios from 'axios';
 import Header from '../components/Header/Header';
 import UserProfile from '../components/UserProfile/UserProfile';
 import Footer from '../components/Footer/Footer';
+import NotFoundPage from './NotFoundPage';
 import LoadingPage from './LoadingPage';
 
 export default function ProfilePage() {
@@ -16,9 +16,14 @@ export default function ProfilePage() {
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/api/account/${userName}`)
       .then((response) => {
-        setProfileData(response.data);
-        document.title = `${response.data.profileData.fullName} | Wrytte`;
-        setForceFetch(false);
+        if (response.data.msg) {
+          setProfileData(null);
+        }
+        if (response.data.profileData) {
+          setProfileData(response.data);
+          document.title = `${response.data.profileData.fullName} | Wrytte`;
+          setForceFetch(false);
+        }
       });
   }, [userName, forceFetch]);
 
@@ -29,6 +34,12 @@ export default function ProfilePage() {
         <UserProfile profileData={profileData} setForceFetch={setForceFetch} />
         <Footer />
       </>
+    );
+  }
+
+  if (profileData === null) {
+    return (
+      <NotFoundPage />
     );
   }
 

@@ -1,11 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-shadow */
-/* eslint-disable import/no-cycle */
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-undef */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
   BrowserRouter as Router, Route, Switch, Redirect,
@@ -23,6 +15,7 @@ import WritePostPage from './pages/WritePostPage';
 import EditPostPage from './pages/EditPostPage';
 import LoadingPage from './pages/LoadingPage';
 import SettingsPage from './pages/SettingsPage';
+import NotFoundPage from './pages/NotFoundPage';
 import { ActionCreators } from './redux/actions';
 import encrypt from './utils/encrypt';
 
@@ -171,6 +164,7 @@ function App() {
         <Route exact path="/:userName" component={ProfilePage} />
         <Route exact path="/article/:articleTitle" component={ArticlePage} />
         <Route exact path="/edit/:articleTitle" component={EditPostPage} />
+        <Route path="" component={NotFoundPage} />
         <Redirect from="/article" to="/" />
       </Switch>
     </AuthContext.Provider>

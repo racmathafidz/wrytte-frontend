@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable no-undef */
 const toolbar = {
   options: ['inline', 'blockType', 'list', 'link', 'embedded', 'emoji', 'image', 'remove', 'history'],
   blockType: {

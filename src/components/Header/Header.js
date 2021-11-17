@@ -1,8 +1,3 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
-/* eslint-disable import/no-cycle */
 import React, {
   useState, useContext, useRef, useEffect,
 } from 'react';

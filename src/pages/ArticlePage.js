@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -7,6 +6,7 @@ import Header from '../components/Header/Header';
 import Article from '../components/Article/Article';
 import Footer from '../components/Footer/Footer';
 import LoadingPage from './LoadingPage';
+import NotFoundPage from './NotFoundPage';
 
 export default function ArticlePage() {
   const { articleTitle } = useParams();
@@ -16,8 +16,13 @@ export default function ArticlePage() {
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/api/article/${articleTitle}`)
       .then((response) => {
-        setArticleData(response.data);
-        document.title = `${response.data.articleTitle} | Wrytte`;
+        if (response.data.msg) {
+          setArticleData(null);
+        }
+        if (response.data.articleTitle) {
+          setArticleData(response.data);
+          document.title = `${response.data.articleTitle} | Wrytte`;
+        }
       });
   }, [articleTitle]);
 
@@ -39,6 +44,12 @@ export default function ArticlePage() {
         <Article article={articleData} recomendation={recomendation} />
         <Footer />
       </>
+    );
+  }
+
+  if (articleData === null) {
+    return (
+      <NotFoundPage />
     );
   }
 

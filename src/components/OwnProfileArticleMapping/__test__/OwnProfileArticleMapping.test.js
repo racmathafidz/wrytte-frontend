@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable react/prop-types */
 import { screen, render, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import OwnProfileArticleMapping from '../OwnProfileArticleMapping';
