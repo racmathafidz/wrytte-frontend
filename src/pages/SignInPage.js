@@ -44,12 +44,12 @@ export default function SignInPage(props) {
 
   return (
     <div className="flex flex-row">
-      <div className="w-2/6 py-11 pl-10 flex flex-col">
+      <div className="w-full xl:w-2/6 py-11 pl-4 sm:pl-10 flex flex-col">
         <div className="inline-flex">
           <BrandIcon />
         </div>
         <p className="font-sans font-light text-3xl text-gray-900 mt-10 mb-8">Sign In To Your Account</p>
-        <div className="pr-24 flex flex-col">
+        <div className="pr-4 sm:pr-10 xl:pr-24 flex flex-col">
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
             render={(renderProps) => (
@@ -60,7 +60,9 @@ export default function SignInPage(props) {
             onFailure={googleSignInHandler}
             cookiePolicy="single_host_origin"
           />
-          <p className="signin-or font-sans font-light text-md text-gray-900 text-center my-8">OR</p>
+          <p className="w-full signin-or font-sans font-light text-md text-gray-900 text-center my-8 border-b border-gray-300 pt-4">
+            <span className="bg-white px-4">OR</span>
+          </p>
           <form onSubmit={handleSubmit(signInHandler)}>
             <label htmlFor="email" className="auth-label">
               Email Address
@@ -98,7 +100,7 @@ export default function SignInPage(props) {
           </p>
         </div>
       </div>
-      <div className="w-4/6 bg-gray-700">
+      <div className="w-0 xl:w-4/6 bg-gray-700">
         <img src={SignIn} alt="Sign In" className="h-screen object-scale-down" />
       </div>
     </div>

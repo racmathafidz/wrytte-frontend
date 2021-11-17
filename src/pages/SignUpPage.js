@@ -44,31 +44,35 @@ export default function SignUpPage(props) {
 
   return (
     <div className="flex flex-row">
-      <div className="w-1/2 bg-gray-700">
+      <div className="w-0 xl:w-1/2 bg-gray-700">
         <LazyLoad>
           <img src={SignUp} alt="Sign Up" className="h-screen object-scale-down" />
         </LazyLoad>
       </div>
-      <div className="w-1/2 py-11 px-10 flex flex-col">
+      <div className="w-full xl:w-1/2 py-11 px-4 sm:px-10 flex flex-col">
         <div className="inline-flex">
           <BrandIcon />
         </div>
         <p className="font-sans font-light text-3xl text-gray-900 mt-10 mb-8">Sign Up and Join Wrytte</p>
-        <div className="flex flex-col pr-72">
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            render={(renderProps) => (
-              <GoogleButton onClick={renderProps.onClick} />
-            )}
-            buttonText="Continue with Google"
-            onSuccess={googleSignUpHandler}
-            onFailure={googleSignUpHandler}
-            cookiePolicy="single_host_origin"
-          />
+        <div className="flex flex-col">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+              render={(renderProps) => (
+                <GoogleButton onClick={renderProps.onClick} />
+              )}
+              buttonText="Continue with Google"
+              onSuccess={googleSignUpHandler}
+              onFailure={googleSignUpHandler}
+              cookiePolicy="single_host_origin"
+            />
+          </div>
         </div>
-        <p className="signup-or font-sans font-light text-md text-gray-900 text-center my-8">OR</p>
+        <p className="w-full signup-or font-sans font-light text-md text-gray-900 text-center my-8 border-b border-gray-300 pt-4">
+          <span className="bg-white px-4">OR</span>
+        </p>
         <form onSubmit={handleSubmit(signUpHandler)}>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="firstName" className="auth-label">
                 First Name
@@ -131,7 +135,7 @@ export default function SignUpPage(props) {
               <input type="submit" value="Sign Up" className="auth-button" />
             </div>
             <div>
-              <p className="font-sans font-light text-gray-900 mt-6 ml-1">
+              <p className="font-sans font-light text-gray-900 mt-6 ml-1 text-center sm:text-left">
                 Already have an account?
                 {' '}
                 <NavLink to="/signin" className="text-blue-900">Sign In</NavLink>

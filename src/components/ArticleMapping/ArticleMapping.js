@@ -19,7 +19,7 @@ export default function ArticleMapping(props) {
 
   if (Home) {
     return (
-      <div className="grid grid-cols-3 gap-7 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-7 mb-6">
         {
           ArticleData.map((items, index) => (
             <div className="mb-6" key={index}>
@@ -63,7 +63,7 @@ export default function ArticleMapping(props) {
 
   if (Recomendation) {
     return (
-      <div className="grid grid-cols-3 gap-7">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-7">
         {
           ArticleData.map((items, index) => (
             <div className="mb-6" key={index}>
@@ -113,7 +113,7 @@ export default function ArticleMapping(props) {
     }
 
     return (
-      <div className="grid grid-cols-3 gap-7 mt-12 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-7 mt-12 mb-6">
         {
             ArticleData.map((items, index) => (
               <div className="mb-6" key={index}>
@@ -159,7 +159,7 @@ export default function ArticleMapping(props) {
     }
 
     return (
-      <div className="grid grid-cols-3 gap-7 mt-12 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-7 mt-12 mb-6">
         {
             ArticleData.map((items, index) => (
               <OwnProfileArticleMapping items={items} index={index} setForceFetch={setForceFetch} />

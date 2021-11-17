@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
@@ -20,12 +21,14 @@ import axios from 'axios';
 import Toolbar from '../utils/toolbar';
 import decrypt from '../utils/decrypt';
 import urlTitle from '../utils/urlTitle';
+import sendEmail from '../utils/sendEmail';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 export default function WritePostPage() {
   const encryptedState = useSelector((state) => state);
   const userDataState = encryptedState.UserData.userData ? decrypt(encryptedState.UserData.userData) : encryptedState.UserData;
   const history = useHistory();
+  const [rows, setRows] = useState(3);
   const [selectedImage, setSelectedImage] = useState();
   const [convertedContent, setConvertedContent] = useState(null);
   const [isPublishing, setIsPublishing] = useState(false);
@@ -33,8 +36,31 @@ export default function WritePostPage() {
     () => EditorState.createEmpty(),
   );
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const titleRegister = register('title', { required: true });
   const imageCoverRegister = register('imageCover', { required: true });
   console.log(errors);
+
+  function titleChange(event) {
+    const textareaLineHeight = window.innerWidth < 1024 ? 45 : 48;
+    const minRows = 3;
+    const maxRows = 10;
+
+    const previousRows = event.target.rows;
+    event.target.rows = minRows;
+
+    const currentRows = (event.target.scrollHeight / textareaLineHeight);
+
+    if (currentRows === previousRows) {
+      event.target.rows = currentRows;
+    }
+
+    if (currentRows >= maxRows) {
+      event.target.rows = maxRows;
+      event.target.scrollTop = event.target.scrollHeight;
+    }
+
+    setRows(currentRows < maxRows ? currentRows : maxRows);
+  }
 
   function imageChange(event) {
     if (event.target.files && event.target.files.length > 0) {
@@ -96,6 +122,7 @@ export default function WritePostPage() {
     }).then((response) => {
       if (response.data.articleTitle) {
         history.push(`/article/${urlTitle(response.data.articleTitle)}`);
+        sendEmail(`/article/${urlTitle(response.data.articleTitle)}`);
       }
     });
   }
@@ -112,15 +139,19 @@ export default function WritePostPage() {
   }, []);
 
   return (
-    <div className="container mx-auto px-52 flex flex-col pt-20 pb-8 font-serif">
+    <div className="container mx-auto px-4 sm:px-20 lg:px-32 xl:px-52 flex flex-col pt-12 sm:pt-16 xl:pt-20 pb-8 font-serif">
       <form onSubmit={handleSubmit(publishHandler)}>
         <textarea
           name="title"
           id="title"
-          rows="3"
+          rows={rows}
           placeholder="Type your title here..."
-          className="resize-none overflow-hidden w-full border-0 text-5xl focus:outline-none"
-          {...register('title', { required: true })}
+          className="resize-none overflow-hidden w-full border-0 text-4xl lg:text-5xl leading-tight focus:outline-none"
+          {...titleRegister}
+          onChange={(e) => {
+            titleRegister.onChange(e);
+            titleChange(e);
+          }}
         />
         { errors.title && errors.title.type === 'required' && (<span className="auth-error">Please add title.</span>) }
         {

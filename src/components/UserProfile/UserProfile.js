@@ -47,16 +47,16 @@ export default function UserProfile(props) {
   }, [firstArticleIndex, profileData]);
 
   return (
-    <div className="container mx-auto px-4 mt-12 mb-20">
+    <div className="container mx-auto px-4 mt-12 pb-52">
       <div className="flex flex-row items-center">
         <LazyLoad>
           <img
             src={`${profileData.profileData.imageProfile}`}
             alt="Author"
-            className="h-28 w-28 object-cover mr-6 rounded-full"
+            className="h-20 w-20 lg:h-28 lg:w-28 object-cover mr-4 lg:mr-6 rounded-full"
           />
         </LazyLoad>
-        <p className="font-sans font-light text-5xl">{profileData.profileData.fullName}</p>
+        <p className="font-sans font-light text-4xl lg:text-5xl">{profileData.profileData.fullName}</p>
       </div>
       <ArticleMapping
         ArticleData={articleData}

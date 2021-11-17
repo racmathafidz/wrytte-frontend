@@ -16,9 +16,9 @@ export default function Article(props) {
   const articleUrl = window.location.href;
 
   return (
-    <div className="pb-8">
-      <div className="container mx-auto px-52 flex flex-col pt-20 pb-8 font-serif">
-        <p className="text-5xl">{article.articleTitle}</p>
+    <div className="pb-52">
+      <div className="container mx-auto px-4 md:px-24 lg:px-32 xl:px-52 flex flex-col pt-12 md:pt-16 lg:pt-20 pb-8 font-serif">
+        <p className="text-4xl lg:text-5xl leading-tight">{article.articleTitle}</p>
         <div className="flex flex-row mt-4 items-center">
           <NavLink
             to={`/${article.authorData.userName}`}
@@ -45,10 +45,10 @@ export default function Article(props) {
         <LazyLoad>
           <img src={`${article.imageCover}`} alt="Article Illustration" className="my-9 mx-auto" />
         </LazyLoad>
-        <div className="font-serif font-light text-lg text-justify leading-normal text-black">
+        <div className="font-serif font-light text-md lg:text-lg text-justify leading-normal text-black">
           {stringToHtml(article.articleBody)}
         </div>
-        <div className="grid grid-cols-2 gap-4 my-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-16">
           <div className="border border-gray-500 py-4 px-6 rounded-lg">
             <p className="font-sans font-light text-xl text-black">About The Author</p>
             <div className="flex flex-row items-center mt-4">

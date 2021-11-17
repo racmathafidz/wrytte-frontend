@@ -80,13 +80,13 @@ export default function Settings(props) {
   }
 
   return (
-    <div>
+    <div className="pb-52">
       {
         isUpdated && (
           <div className="w-full py-4 bg-black text-center text-gray-100">Your profile has been updated</div>
         )
       }
-      <div className="container px-80 mt-12 pb-12 flex flex-col px-52 font-sans">
+      <div className="container px-4 sm:px-24 lg:px-32 xl:px-80 mt-12 pb-12 flex flex-col font-sans">
         <p className="font-sans font-light text-gray-800 text-4xl mb-10">Account Settings</p>
         <form onSubmit={handleSubmit(saveHandler)}>
           <div className="flex flex-col">
@@ -118,7 +118,7 @@ export default function Settings(props) {
                 />
               </label>
             </div>
-            <div className="grid grid-cols-2 gap-4 mb-6 items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mb-6 items-center">
               <p className="setting-label">Full Name</p>
               <input
                 type="text"
@@ -130,7 +130,7 @@ export default function Settings(props) {
                 {...register('fullName', { required: true })}
               />
             </div>
-            <div className="grid grid-cols-2 gap-4 mb-6 items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mb-6 items-center">
               <p className="setting-label">Username</p>
               <input
                 type="text"
@@ -142,7 +142,7 @@ export default function Settings(props) {
                 {...register('userName', { required: true })}
               />
             </div>
-            <div className="grid grid-cols-2 gap-4 mb-6 items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mb-6 items-center">
               <p className="setting-label">Email</p>
               <input
                 type="text"

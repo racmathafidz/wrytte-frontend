@@ -41,7 +41,7 @@ export default function ArticlesList(props) {
   }, [firstArticleIndex]);
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 pt-6 pb-52">
       <p className="font-serif text-xl mb-6">Recomended Articles</p>
       <ArticleMapping ArticleData={articleData} Home />
       <ReactPaginate
