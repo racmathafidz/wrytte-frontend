@@ -123,8 +123,12 @@ h6 {
   @apply h-7 w-7 object-cover rounded-full;
 }
 
+.lazyload-author-about > img {
+  @apply h-16 w-16 object-cover rounded-full;
+}
+
 .lazyload-author-profile > img {
-  @apply h-20 w-20 lg:h-28 lg:w-28  mr-4 lg:mr-6 object-cover rounded-full;
+  @apply h-20 w-20 lg:h-28 lg:w-28 object-cover rounded-full;
 }
 
 .lazyload-article > img {

@@ -50,7 +50,7 @@ export default function UserProfile(props) {
           height="80px"
           width="80px"
           effect="blur"
-          wrapperClassName="lazyload-author-profile"
+          wrapperClassName="lazyload-author-profile mr-4 lg:mr-6"
         />
         <p className="font-sans font-light text-4xl lg:text-5xl">{profileData.profileData.fullName}</p>
       </div>
