@@ -120,7 +120,7 @@ h6 {
 }
 
 .lazyload-author > img {
-  @apply h-7 w-7 object-cover rounded-full;
+  @apply block h-7 w-7 object-cover rounded-full;
 }
 
 .lazyload-author-about > img {
