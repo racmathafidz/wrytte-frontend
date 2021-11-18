@@ -27,7 +27,6 @@ export default function Article(props) {
               height="2rem"
               width="2rem"
               effect="blur"
-              key={index}
               wrapperClassName="object-cover mr-2 rounded-full"
             />
           </NavLink>
@@ -48,7 +47,6 @@ export default function Article(props) {
           height="auto"
           width="auto"
           effect="blur"
-          key={index}
           wrapperClassName="my-9 mx-auto"
         />
         <div className="font-serif font-light text-md lg:text-lg text-justify leading-normal text-black">
@@ -67,7 +65,6 @@ export default function Article(props) {
                   height="4rem"
                   width="4rem"
                   effect="blur"
-                  key={index}
                   wrapperClassName="object-cover mr-4 rounded-full"
                 />
               </NavLink>

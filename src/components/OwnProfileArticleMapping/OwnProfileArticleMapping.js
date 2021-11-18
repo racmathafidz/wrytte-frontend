@@ -58,7 +58,6 @@ export default function OwnProfileArticleMapping(props) {
           height="18rem"
           width="24rem"
           effect="blur"
-          key={index}
           wrapperClassName="rounded object-cover mb-2"
         />
       </NavLink>
@@ -75,7 +74,6 @@ export default function OwnProfileArticleMapping(props) {
                 height="1.75rem"
                 width="1.75rem"
                 effect="blur"
-                key={index}
                 wrapperClassName="object-cover mr-3 rounded-full"
               />
             </NavLink>

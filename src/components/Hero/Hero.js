@@ -21,7 +21,6 @@ export default function Hero() {
           height="auto"
           width="auto"
           effect="blur"
-          key={index}
           wrapperClassName="object-scale-down"
         />
       </div>

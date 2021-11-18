@@ -50,7 +50,6 @@ export default function UserProfile(props) {
           height="5rem"
           width="5rem"
           effect="blur"
-          key={index}
           wrapperClassName="lg:h-28 lg:w-28 object-cover mr-4 lg:mr-6 rounded-full"
         />
         <p className="font-sans font-light text-4xl lg:text-5xl">{profileData.profileData.fullName}</p>
