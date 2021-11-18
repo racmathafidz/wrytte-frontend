@@ -47,8 +47,6 @@ export default function UserProfile(props) {
         <LazyLoadImage
           src={`${profileData.profileData.imageProfile}`}
           alt="Author"
-          height="80px"
-          width="80px"
           effect="blur"
           wrapperClassName="lazyload-author-profile mr-4 lg:mr-6"
         />
