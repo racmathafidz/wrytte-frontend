@@ -55,8 +55,8 @@ export default function OwnProfileArticleMapping(props) {
         <LazyLoadImage
           src={`${items.imageCover}`}
           alt="Article"
-          height="18rem"
-          width="24rem"
+          height="288px"
+          width="384px"
           effect="blur"
           wrapperClassName="rounded object-cover mb-2"
         />
@@ -71,8 +71,8 @@ export default function OwnProfileArticleMapping(props) {
               <LazyLoadImage
                 src={`${items.authorData.imageProfile}`}
                 alt="Author"
-                height="1.75rem"
-                width="1.75rem"
+                height="28px"
+                width="28px"
                 effect="blur"
                 wrapperClassName="object-cover mr-3 rounded-full"
               />

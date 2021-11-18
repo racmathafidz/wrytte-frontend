@@ -24,8 +24,8 @@ export default function Article(props) {
             <LazyLoadImage
               src={`${article.authorData.imageProfile}`}
               alt="Author"
-              height="2rem"
-              width="2rem"
+              height="32px"
+              width="32px"
               effect="blur"
               wrapperClassName="object-cover mr-2 rounded-full"
             />
@@ -62,8 +62,8 @@ export default function Article(props) {
                 <LazyLoadImage
                   src={`${article.authorData.imageProfile}`}
                   alt="Author"
-                  height="4rem"
-                  width="4rem"
+                  height="64px"
+                  width="64px"
                   effect="blur"
                   wrapperClassName="object-cover mr-4 rounded-full"
                 />
