@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LazyLoad from 'react-lazyload';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import HeroImage from '../../assets/images/hero-image.png';
 
@@ -15,9 +15,15 @@ export default function Hero() {
         </NavLink>
       </div>
       <div className="w-0 sm:w-2/5">
-        <LazyLoad>
-          <img src={HeroImage} alt="Hero" className="object-scale-down" />
-        </LazyLoad>
+        <LazyLoadImage
+          src={HeroImage}
+          alt="Hero"
+          height="auto"
+          width="auto"
+          effect="blur"
+          key={index}
+          wrapperClassName="object-scale-down"
+        />
       </div>
     </div>
   );

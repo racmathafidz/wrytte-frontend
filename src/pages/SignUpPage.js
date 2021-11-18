@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink, useHistory } from 'react-router-dom';
-import LazyLoad from 'react-lazyload';
 import GoogleLogin from 'react-google-login';
 import { useSelector } from 'react-redux';
 
@@ -39,9 +38,7 @@ export default function SignUpPage(props) {
   return (
     <div className="flex flex-row">
       <div className="w-0 xl:w-1/2 bg-gray-700">
-        <LazyLoad>
-          <img src={SignUp} alt="Sign Up" className="h-screen object-scale-down" />
-        </LazyLoad>
+        <img src={SignUp} alt="Sign Up" className="h-screen object-scale-down" />
       </div>
       <div className="w-full xl:w-1/2 py-11 px-4 sm:px-10 flex flex-col">
         <div className="inline-flex">

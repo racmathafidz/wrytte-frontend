@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import LazyLoad from 'react-lazyload';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import ReactPaginate from 'react-paginate';
 
 import ArticleMapping from '../ArticleMapping/ArticleMapping';
@@ -44,13 +44,15 @@ export default function UserProfile(props) {
   return (
     <div className="container mx-auto px-4 mt-12 pb-52">
       <div className="flex flex-row items-center">
-        <LazyLoad>
-          <img
-            src={`${profileData.profileData.imageProfile}`}
-            alt="Author"
-            className="h-20 w-20 lg:h-28 lg:w-28 object-cover mr-4 lg:mr-6 rounded-full"
-          />
-        </LazyLoad>
+        <LazyLoadImage
+          src={`${profileData.profileData.imageProfile}`}
+          alt="Author"
+          height="5rem"
+          width="5rem"
+          effect="blur"
+          key={index}
+          wrapperClassName="lg:h-28 lg:w-28 object-cover mr-4 lg:mr-6 rounded-full"
+        />
         <p className="font-sans font-light text-4xl lg:text-5xl">{profileData.profileData.fullName}</p>
       </div>
       <ArticleMapping

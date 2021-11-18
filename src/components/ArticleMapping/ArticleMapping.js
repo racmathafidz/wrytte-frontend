@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LazyLoad from 'react-lazyload';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import OwnProfileArticleMapping from '../OwnProfileArticleMapping/OwnProfileArticleMapping';
 import dateFormatter from '../../utils/dateFormatter';
@@ -19,22 +19,30 @@ export default function ArticleMapping(props) {
           ArticleData.map((items, index) => (
             <div className="mb-6" key={index}>
               <NavLink to={`/article/${urlTitle(items.articleTitle)}`}>
-                <LazyLoad>
-                  <img src={`${items.imageCover}`} alt="Article" className="h-72 w-96 rounded object-cover mb-2" />
-                </LazyLoad>
+                <LazyLoadImage
+                  src={`${items.imageCover}`}
+                  alt="Article"
+                  height="18rem"
+                  width="24rem"
+                  effect="blur"
+                  key={index}
+                  wrapperClassName="rounded object-cover mb-2"
+                />
                 <p className="text-xl font-sans">{items.articleTitle}</p>
               </NavLink>
               <div className="flex flex-row items-center mt-2">
                 <NavLink
                   to={`/${items.authorData.userName}`}
                 >
-                  <LazyLoad>
-                    <img
-                      src={`${items.authorData.imageProfile}`}
-                      alt="Author"
-                      className="h-7 w-7 object-cover mr-3 rounded-full"
-                    />
-                  </LazyLoad>
+                  <LazyLoadImage
+                    src={`${items.authorData.imageProfile}`}
+                    alt="Author"
+                    height="1.75rem"
+                    width="1.75rem"
+                    effect="blur"
+                    key={index}
+                    wrapperClassName="object-cover mr-3 rounded-full"
+                  />
                 </NavLink>
                 <NavLink
                   to={`/${items.authorData.userName}`}
@@ -63,22 +71,30 @@ export default function ArticleMapping(props) {
           ArticleData.map((items, index) => (
             <div className="mb-6" key={index}>
               <NavLink to={`/article/${urlTitle(items.articleTitle)}`}>
-                <LazyLoad>
-                  <img src={`${items.imageCover}`} alt="Article" className="h-72 w-96 rounded object-cover mb-2" />
-                </LazyLoad>
+                <LazyLoadImage
+                  src={`${items.imageCover}`}
+                  alt="Article"
+                  height="18rem"
+                  width="24rem"
+                  effect="blur"
+                  key={index}
+                  wrapperClassName="rounded object-cover mb-2"
+                />
                 <p className="text-xl font-sans">{items.articleTitle}</p>
               </NavLink>
               <div className="flex flex-row items-center mt-2">
                 <NavLink
                   to={`/${items.authorData.userName}`}
                 >
-                  <LazyLoad>
-                    <img
-                      src={`${items.authorData.imageProfile}`}
-                      alt="Author"
-                      className="h-7 w-7 object-cover mr-3 rounded-full"
-                    />
-                  </LazyLoad>
+                  <LazyLoadImage
+                    src={`${items.authorData.imageProfile}`}
+                    alt="Author"
+                    height="1.75rem"
+                    width="1.75rem"
+                    effect="blur"
+                    key={index}
+                    wrapperClassName="object-cover mr-3 rounded-full"
+                  />
                 </NavLink>
                 <NavLink
                   to={`/${items.authorData.userName}`}
@@ -113,20 +129,28 @@ export default function ArticleMapping(props) {
             ArticleData.map((items, index) => (
               <div className="mb-6" key={index}>
                 <NavLink to={`/article/${urlTitle(items.articleTitle)}`} className="">
-                  <LazyLoad>
-                    <img src={`${items.imageCover}`} alt="Article" className="h-72 w-96 rounded object-cover mb-2" />
-                  </LazyLoad>
+                  <LazyLoadImage
+                    src={`${items.imageCover}`}
+                    alt="Article"
+                    height="18rem"
+                    width="24rem"
+                    effect="blur"
+                    key={index}
+                    wrapperClassName="rounded object-cover mb-2"
+                  />
                   <p className="text-xl font-sans">{items.articleTitle}</p>
                 </NavLink>
                 <div className="flex flex-row items-center mt-2">
                   <NavLink to={`/${items.authorData.userName}`}>
-                    <LazyLoad>
-                      <img
-                        src={`${items.authorData.imageProfile}`}
-                        alt="Author"
-                        className="h-7 w-7 object-cover mr-3 rounded-full"
-                      />
-                    </LazyLoad>
+                    <LazyLoadImage
+                      src={`${items.authorData.imageProfile}`}
+                      alt="Author"
+                      height="1.75rem"
+                      width="1.75rem"
+                      effect="blur"
+                      key={index}
+                      wrapperClassName="object-cover mr-3 rounded-full"
+                    />
                   </NavLink>
                   <NavLink to={`/${items.authorData.userName}`} className="hover:underline">
                     <p className="font-sans font-light">{items.authorData.fullName}</p>

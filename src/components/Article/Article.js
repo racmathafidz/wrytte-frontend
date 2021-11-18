@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LazyLoad from 'react-lazyload';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import {
   FacebookShareButton, TwitterShareButton, LinkedinShareButton, WhatsappShareButton, FacebookIcon, TwitterIcon, LinkedinIcon, WhatsappIcon,
 } from 'react-share';
@@ -21,13 +21,15 @@ export default function Article(props) {
           <NavLink
             to={`/${article.authorData.userName}`}
           >
-            <LazyLoad>
-              <img
-                src={`${article.authorData.imageProfile}`}
-                alt="Author"
-                className="h-8 w-8 object-cover mr-2 rounded-full"
-              />
-            </LazyLoad>
+            <LazyLoadImage
+              src={`${article.authorData.imageProfile}`}
+              alt="Author"
+              height="2rem"
+              width="2rem"
+              effect="blur"
+              key={index}
+              wrapperClassName="object-cover mr-2 rounded-full"
+            />
           </NavLink>
           <NavLink
             to={`/${article.authorData.userName}`}
@@ -40,9 +42,15 @@ export default function Article(props) {
           <p className="px-1 font-sans font-light text-lg">·</p>
           <p className="font-sans font-light text-lg">{dateFormatter(article.publishDate)}</p>
         </div>
-        <LazyLoad>
-          <img src={`${article.imageCover}`} alt="Article Illustration" className="my-9 mx-auto" />
-        </LazyLoad>
+        <LazyLoadImage
+          src={`${article.imageCover}`}
+          alt="Article Illustration"
+          height="auto"
+          width="auto"
+          effect="blur"
+          key={index}
+          wrapperClassName="my-9 mx-auto"
+        />
         <div className="font-serif font-light text-md lg:text-lg text-justify leading-normal text-black">
           {stringToHtml(article.articleBody)}
         </div>
@@ -53,13 +61,15 @@ export default function Article(props) {
               <NavLink
                 to={`/${article.authorData.userName}`}
               >
-                <LazyLoad>
-                  <img
-                    src={`${article.authorData.imageProfile}`}
-                    alt="Author"
-                    className="h-16 w-16 object-cover mr-4 rounded-full"
-                  />
-                </LazyLoad>
+                <LazyLoadImage
+                  src={`${article.authorData.imageProfile}`}
+                  alt="Author"
+                  height="4rem"
+                  width="4rem"
+                  effect="blur"
+                  key={index}
+                  wrapperClassName="object-cover mr-4 rounded-full"
+                />
               </NavLink>
               <NavLink
                 to={`/${article.authorData.userName}`}
