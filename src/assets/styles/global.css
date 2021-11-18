@@ -128,7 +128,7 @@ h6 {
 }
 
 .lazyload-article > img {
-  @apply h-72 h-96 rounded object-cover;
+  @apply h-72 w-96 rounded object-cover;
 }
 
 .wrapper-class {
