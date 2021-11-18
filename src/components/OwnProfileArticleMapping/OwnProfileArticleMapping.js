@@ -58,7 +58,7 @@ export default function OwnProfileArticleMapping(props) {
           height="288px"
           width="384px"
           effect="blur"
-          wrapperClassName="rounded object-cover mb-2"
+          wrapperClassName="lazyload-article mb-2"
         />
       </NavLink>
       <div className="flex flex-row justify-between items-center" ref={popperRef}>
@@ -74,7 +74,7 @@ export default function OwnProfileArticleMapping(props) {
                 height="28px"
                 width="28px"
                 effect="blur"
-                wrapperClassName="object-cover mr-3 rounded-full"
+                wrapperClassName="lazyload-author mr-3"
               />
             </NavLink>
             <NavLink to={`/${items.authorData.userName}`} className="hover:underline">

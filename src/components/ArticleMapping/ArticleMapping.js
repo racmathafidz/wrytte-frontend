@@ -26,7 +26,7 @@ export default function ArticleMapping(props) {
                   width="384px"
                   effect="blur"
                   key={index}
-                  wrapperClassName="rounded object-cover mb-2"
+                  wrapperClassName="lazyload-article mb-2"
                 />
                 <p className="text-xl font-sans">{items.articleTitle}</p>
               </NavLink>
@@ -41,7 +41,7 @@ export default function ArticleMapping(props) {
                     width="28px"
                     effect="blur"
                     key={index}
-                    wrapperClassName="object-cover mr-3 rounded-full"
+                    wrapperClassName="lazyload-author mr-3"
                   />
                 </NavLink>
                 <NavLink
@@ -78,7 +78,7 @@ export default function ArticleMapping(props) {
                   width="384px"
                   effect="blur"
                   key={index}
-                  wrapperClassName="rounded object-cover mb-2"
+                  wrapperClassName="lazyload-article mb-2"
                 />
                 <p className="text-xl font-sans">{items.articleTitle}</p>
               </NavLink>
@@ -93,7 +93,7 @@ export default function ArticleMapping(props) {
                     width="28px"
                     effect="blur"
                     key={index}
-                    wrapperClassName="object-cover mr-3 rounded-full"
+                    wrapperClassName="lazyload-author mr-3"
                   />
                 </NavLink>
                 <NavLink
@@ -136,7 +136,7 @@ export default function ArticleMapping(props) {
                     width="384px"
                     effect="blur"
                     key={index}
-                    wrapperClassName="rounded object-cover mb-2"
+                    wrapperClassName="lazyload-article mb-2"
                   />
                   <p className="text-xl font-sans">{items.articleTitle}</p>
                 </NavLink>
@@ -149,7 +149,7 @@ export default function ArticleMapping(props) {
                       width="1.75rem"
                       effect="blur"
                       key={index}
-                      wrapperClassName="object-cover mr-3 rounded-full"
+                      wrapperClassName="lazyload-author mr-3"
                     />
                   </NavLink>
                   <NavLink to={`/${items.authorData.userName}`} className="hover:underline">

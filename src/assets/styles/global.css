@@ -119,6 +119,18 @@ h6 {
   @apply flex text-sm text-white bg-red-500 py-1 px-4 rounded-full;
 }
 
+.lazyload-author > img {
+  @apply object-cover rounded-full;
+}
+
+.lazyload-author-profile > img {
+  @apply lg:h-28 lg:w-28 object-cover rounded-full;
+}
+
+.lazyload-article > img {
+  @apply rounded object-cover;
+}
+
 .wrapper-class {
   border: 1px solid #9CA3AF;
   border-radius: 0.25rem;
