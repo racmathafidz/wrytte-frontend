@@ -51,7 +51,7 @@ export default function OwnProfileArticleMapping(props) {
 
   return (
     <div className="mb-6" key={index}>
-      <NavLink to={`/article/${urlTitle(items.articleTitle)}`} className="">
+      <NavLink to={`/article/${urlTitle(items.articleTitle)}-${items._id}`} className="">
         <LazyLoadImage
           src={`${items.imageCover}`}
           alt="Article"
@@ -61,7 +61,7 @@ export default function OwnProfileArticleMapping(props) {
       </NavLink>
       <div className="flex flex-row justify-between items-center" ref={popperRef}>
         <div className="flex flex-col">
-          <NavLink to={`/article/${urlTitle(items.articleTitle)}`}>
+          <NavLink to={`/article/${urlTitle(items.articleTitle)}-${items._id}`}>
             <p className="text-xl font-sans">{items.articleTitle}</p>
           </NavLink>
           <div className="flex flex-row items-center mt-2">

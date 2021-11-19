@@ -7,6 +7,7 @@ import Article from '../components/Article/Article';
 import Footer from '../components/Footer/Footer';
 import LoadingPage from './LoadingPage';
 import NotFoundPage from './NotFoundPage';
+import getArticleId from '../utils/getArticleId';
 
 export default function ArticlePage() {
   const { articleTitle } = useParams();
@@ -14,7 +15,7 @@ export default function ArticlePage() {
   const [recomendation, setRecomendation] = useState();
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BASE_URL}/api/article/${articleTitle}`)
+    axios.get(`${process.env.REACT_APP_BASE_URL}/api/article/${getArticleId(articleTitle)}`)
       .then((response) => {
         if (response.data.msg) {
           setArticleData(null);

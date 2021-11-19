@@ -18,7 +18,7 @@ export default function ArticleMapping(props) {
         {
           ArticleData.map((items, index) => (
             <div className="mb-6" key={index}>
-              <NavLink to={`/article/${urlTitle(items.articleTitle)}`}>
+              <NavLink to={`/article/${urlTitle(items.articleTitle)}-${items._id}`}>
                 <LazyLoadImage
                   src={`${items.imageCover}`}
                   alt="Article"
@@ -66,7 +66,7 @@ export default function ArticleMapping(props) {
         {
           ArticleData.map((items, index) => (
             <div className="mb-6" key={index}>
-              <NavLink to={`/article/${urlTitle(items.articleTitle)}`}>
+              <NavLink to={`/article/${urlTitle(items.articleTitle)}-${items._id}`}>
                 <LazyLoadImage
                   src={`${items.imageCover}`}
                   alt="Article"
@@ -120,7 +120,7 @@ export default function ArticleMapping(props) {
         {
             ArticleData.map((items, index) => (
               <div className="mb-6" key={index}>
-                <NavLink to={`/article/${urlTitle(items.articleTitle)}`} className="">
+                <NavLink to={`/article/${urlTitle(items.articleTitle)}-${items._id}`}>
                   <LazyLoadImage
                     src={`${items.imageCover}`}
                     alt="Article"
@@ -157,7 +157,6 @@ export default function ArticleMapping(props) {
     if (ArticleData.length === 0) {
       return (
         <div className="w-full py-24">
-          <p className="text-center font-sans font-light text-lg">Wellcome, you haven't written any articles yet.</p>
           <NavLink to="/write" className="flex w-full">
             <p className="mx-auto font-sans font-light text-lg underline">Start Writing</p>
           </NavLink>
