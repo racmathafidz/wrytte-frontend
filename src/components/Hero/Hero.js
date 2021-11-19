@@ -18,8 +18,6 @@ export default function Hero() {
         <LazyLoadImage
           src={HeroImage}
           alt="Hero"
-          height="auto"
-          width="auto"
           effect="blur"
           wrapperClassName="object-scale-down"
         />
