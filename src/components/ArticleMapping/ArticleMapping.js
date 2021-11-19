@@ -22,8 +22,6 @@ export default function ArticleMapping(props) {
                 <LazyLoadImage
                   src={`${items.imageCover}`}
                   alt="Article"
-                  height="288px"
-                  width="384px"
                   effect="blur"
                   key={index}
                   wrapperClassName="lazyload-article mb-2"
@@ -37,8 +35,6 @@ export default function ArticleMapping(props) {
                   <LazyLoadImage
                     src={`${items.authorData.imageProfile}`}
                     alt="Author"
-                    height="28px"
-                    width="28px"
                     effect="blur"
                     key={index}
                     wrapperClassName="lazyload-author mr-3"
@@ -74,8 +70,6 @@ export default function ArticleMapping(props) {
                 <LazyLoadImage
                   src={`${items.imageCover}`}
                   alt="Article"
-                  height="288px"
-                  width="384px"
                   effect="blur"
                   key={index}
                   wrapperClassName="lazyload-article mb-2"
@@ -89,8 +83,6 @@ export default function ArticleMapping(props) {
                   <LazyLoadImage
                     src={`${items.authorData.imageProfile}`}
                     alt="Author"
-                    height="28px"
-                    width="28px"
                     effect="blur"
                     key={index}
                     wrapperClassName="lazyload-author mr-3"
@@ -132,8 +124,6 @@ export default function ArticleMapping(props) {
                   <LazyLoadImage
                     src={`${items.imageCover}`}
                     alt="Article"
-                    height="288px"
-                    width="384px"
                     effect="blur"
                     key={index}
                     wrapperClassName="lazyload-article mb-2"
@@ -145,8 +135,6 @@ export default function ArticleMapping(props) {
                     <LazyLoadImage
                       src={`${items.authorData.imageProfile}`}
                       alt="Author"
-                      height="1.75rem"
-                      width="1.75rem"
                       effect="blur"
                       key={index}
                       wrapperClassName="lazyload-author mr-3"
