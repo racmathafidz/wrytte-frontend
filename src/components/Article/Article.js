@@ -27,7 +27,6 @@ export default function Article(props) {
               height="1.75rem"
               width="1.75rem"
               effect="blur"
-              key={index}
               wrapperClassName="lazyload-author mr-3"
             />
           </NavLink>
