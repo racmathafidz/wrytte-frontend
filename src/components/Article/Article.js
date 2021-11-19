@@ -24,10 +24,11 @@ export default function Article(props) {
             <LazyLoadImage
               src={`${article.authorData.imageProfile}`}
               alt="Author"
-              height="32px"
-              width="32px"
+              height="1.75rem"
+              width="1.75rem"
               effect="blur"
-              wrapperClassName="lazyload-author mr-2"
+              key={index}
+              wrapperClassName="lazyload-author mr-3"
             />
           </NavLink>
           <NavLink
