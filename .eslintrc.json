@@ -46,6 +46,7 @@
       "object-curly-newline": "off",
       "react/no-array-index-key": "off",
       "import/prefer-default-export": "off",
-      "no-nested-ternary": "off"
+      "no-nested-ternary": "off",
+      "no-plusplus": "off"
     } 
 }
