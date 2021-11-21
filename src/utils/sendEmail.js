@@ -3,7 +3,7 @@ import emailjs from 'emailjs-com';
 export default function sendEmail(articleUrl) {
   const templateParams = {
     to_name: 'Wrytte Admin',
-    message: `http://localhost:3000${articleUrl}`,
+    message: `https://wrytte.netlify.app${articleUrl}`,
   };
 
   emailjs.send(
