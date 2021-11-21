@@ -124,7 +124,7 @@ h6 {
 }
 
 .lazyload-author-about > img {
-  @apply h-16 w-16 object-cover rounded-full;
+  @apply h-14 w-14 sm:h-16 sm:w-16 object-cover rounded-full;
 }
 
 .lazyload-author-profile > img {
@@ -132,7 +132,7 @@ h6 {
 }
 
 .lazyload-article > img {
-  @apply h-72 w-96 rounded object-cover; 
+  @apply rounded object-cover h-60 w-80 lg:h-52 lg:w-72 xl:h-72 xl:w-96; 
 }
 
 .wrapper-class {

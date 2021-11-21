@@ -117,7 +117,7 @@ export default function Article(props) {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-16">
           <div className="border border-gray-500 py-4 px-6 rounded-lg">
-            <p className="font-sans font-light text-xl text-black">About The Author</p>
+            <p className="font-sans font-light text-lg sm:text-xl text-black">About The Author</p>
             <div className="flex flex-row items-center mt-4">
               <NavLink
                 to={`/${article.authorData.userName}`}
@@ -132,14 +132,14 @@ export default function Article(props) {
               <NavLink
                 to={`/${article.authorData.userName}`}
               >
-                <p className="font-sans font-light text-2xl text-gray-900">
+                <p className="font-sans font-light text-xl sm:text-2xl text-gray-900">
                   {`${article.authorData.fullName}`}
                 </p>
               </NavLink>
             </div>
           </div>
           <div className="border border-gray-500 py-4 px-6 rounded-lg">
-            <p className="font-sans font-light text-xl text-black">Share This Article</p>
+            <p className="font-sans font-light text-lg sm:text-xl text-black">Share This Article</p>
             <div className="flex flex-row items-center mt-4">
               <FacebookShareButton url={`${articleUrl}`} className="mr-2">
                 <FacebookIcon size={48} round />

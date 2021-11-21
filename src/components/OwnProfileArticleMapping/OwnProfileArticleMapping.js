@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import dateFormatter from '../../utils/dateFormatter';
 import urlTitle from '../../utils/urlTitle';
+import placheHolderImage from '../../assets/images/placeholder-image.png';
 
 export default function OwnProfileArticleMapping(props) {
   const { items, index, setForceFetch } = props;
@@ -57,6 +58,7 @@ export default function OwnProfileArticleMapping(props) {
           alt="Article"
           effect="blur"
           wrapperClassName="lazyload-article mb-2"
+          placeholderSrc={placheHolderImage}
         />
       </NavLink>
       <div className="flex flex-row justify-between items-center" ref={popperRef}>
@@ -71,6 +73,7 @@ export default function OwnProfileArticleMapping(props) {
                 alt="Author"
                 effect="blur"
                 wrapperClassName="lazyload-author mr-3"
+                placeholderSrc={placheHolderImage}
               />
             </NavLink>
             <NavLink to={`/${items.authorData.userName}`} className="hover:underline">

@@ -15,7 +15,7 @@ export default function ArticleMapping(props) {
 
   if (Home) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-7 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xl:gap-7 mb-6">
         {
           ArticleData.map((items, index) => (
             <div className="mb-6" key={index}>
@@ -24,8 +24,6 @@ export default function ArticleMapping(props) {
                   effect="blur"
                   src={items.imageCover}
                   alt="Article"
-                  height="288px"
-                  width="384px"
                   key={index}
                   wrapperClassName="lazyload-article mb-2"
                   placeholderSrc={placheHolderImage}
@@ -40,8 +38,6 @@ export default function ArticleMapping(props) {
                     effect="blur"
                     src={items.authorData.imageProfile}
                     alt="Author"
-                    height="28px"
-                    width="28px"
                     key={index}
                     wrapperClassName="lazyload-author mr-3"
                     placeholderSrc={placheHolderImage}
@@ -69,7 +65,7 @@ export default function ArticleMapping(props) {
 
   if (Recomendation) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-7">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xl:gap-7">
         {
           ArticleData.map((items, index) => (
             <div className="mb-6" key={index}>
@@ -78,8 +74,6 @@ export default function ArticleMapping(props) {
                   effect="blur"
                   src={items.imageCover}
                   alt="Article"
-                  height="288px"
-                  width="384px"
                   key={index}
                   wrapperClassName="lazyload-article mb-2"
                   placeholderSrc={placheHolderImage}
@@ -94,8 +88,6 @@ export default function ArticleMapping(props) {
                     effect="blur"
                     src={items.authorData.imageProfile}
                     alt="Author"
-                    height="28px"
-                    width="28px"
                     key={index}
                     wrapperClassName="lazyload-author mr-3"
                     placeholderSrc={placheHolderImage}
@@ -129,7 +121,7 @@ export default function ArticleMapping(props) {
     }
 
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-7 mt-12 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xl:gap-7 mt-12 mb-6">
         {
             ArticleData.map((items, index) => (
               <div className="mb-6" key={index}>
@@ -138,8 +130,6 @@ export default function ArticleMapping(props) {
                     effect="blur"
                     src={items.imageCover}
                     alt="Article"
-                    height="288px"
-                    width="384px"
                     key={index}
                     wrapperClassName="lazyload-article mb-2"
                     placeholderSrc={placheHolderImage}
@@ -152,8 +142,6 @@ export default function ArticleMapping(props) {
                       effect="blur"
                       src={items.authorData.imageProfile}
                       alt="Author"
-                      height="28px"
-                      width="28px"
                       key={index}
                       wrapperClassName="lazyload-author mr-3"
                       placeholderSrc={placheHolderImage}
@@ -185,7 +173,7 @@ export default function ArticleMapping(props) {
     }
 
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-7 mt-12 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xl:gap-7 mt-12 mb-6">
         {
             ArticleData.map((items, index) => (
               <OwnProfileArticleMapping items={items} index={index} setForceFetch={setForceFetch} />
