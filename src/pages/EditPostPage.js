@@ -8,6 +8,7 @@ import { stateFromHTML } from 'draft-js-import-html';
 // import DOMPurify from 'dompurify';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import Resizer from 'react-image-file-resizer';
 
 import LoadingPage from './LoadingPage';
 import NotFoundPage from './NotFoundPage';
@@ -15,6 +16,7 @@ import Toolbar from '../utils/toolbar';
 import decrypt from '../utils/decrypt';
 import urlTitle from '../utils/urlTitle';
 import sendEmail from '../utils/sendEmail';
+import getArticleId from '../utils/getArticleId';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 export default function EditPostPage() {
@@ -86,21 +88,49 @@ export default function EditPostPage() {
   //   };
   // }
 
-  function publishHandler(data) {
+  const resizeFile = (file) => new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      1280,
+      1280,
+      'JPEG',
+      90,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      'base64',
+    );
+  });
+
+  const dataURIToBlob = (dataURI) => {
+    const splitDataURI = dataURI.split(',');
+    const byteString = splitDataURI[0].indexOf('base64') >= 0
+      ? atob(splitDataURI[1])
+      : decodeURI(splitDataURI[1]);
+    const mimeString = splitDataURI[0].split(':')[1].split(';')[0];
+    const ia = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
+    return new Blob([ia], { type: mimeString });
+  };
+
+  async function publishHandler(data) {
     setIsPublishing(true);
     if (data.imageCover.length > 0) {
-      const uploadImage = new FormData();
-      uploadImage.append('file', selectedImage, 'file');
-      imageUpload(uploadImage, data);
+      const resizedImage = await resizeFile(selectedImage);
+      const uploadImage = dataURIToBlob(resizedImage);
+      const imageForm = new FormData();
+      imageForm.append('file', uploadImage, 'file');
+      imageUpload(imageForm, data);
     } else {
       EditArticle(data, undefined);
     }
   }
 
-  function imageUpload(uploadImage, data) {
+  function imageUpload(imageForm, data) {
     axios({
       method: 'POST',
-      data: uploadImage,
+      data: imageForm,
       url: `${process.env.REACT_APP_BASE_URL}/picture-upload`,
     }).then(async (res) => {
       EditArticle(data, res.data.image);
@@ -120,7 +150,7 @@ export default function EditPostPage() {
       url: `${process.env.REACT_APP_BASE_URL}/api/article/edit/${articleData._id}`,
     }).then((response) => {
       if (response.data.articleTitle) {
-        history.push(`/article/${urlTitle(response.data.articleTitle)}`);
+        history.push(`/article/${urlTitle(response.data.articleTitle)}-${response.data._id}`);
         sendEmail(`/article/${urlTitle(response.data.articleTitle)}`);
       }
     });
@@ -131,7 +161,7 @@ export default function EditPostPage() {
   }
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BASE_URL}/api/article/${articleTitle}`)
+    axios.get(`${process.env.REACT_APP_BASE_URL}/api/article/${getArticleId(articleTitle)}`)
       .then((response) => {
         if (response.data.msg) {
           setArticleData(null);
@@ -206,7 +236,7 @@ export default function EditPostPage() {
           <div className="flex flex-row-reverse items-center my-4">
             {
               isPublishing ? (
-                <p className="pt-4">Publishing on progress...</p>
+                <p className="cursor-wait py-2 px-6 bg-black text-gray-100 rounded-lg">Publishing on progress...</p>
               ) : (
                 <>
                   <input type="submit" value="Publish" className="cursor-pointer py-2 px-6 bg-black text-gray-100 rounded-lg transform transition duration-300 hover:text-white hover:bg-gray-900" />

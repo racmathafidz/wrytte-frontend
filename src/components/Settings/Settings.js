@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Resizer from 'react-image-file-resizer';
 
 import { ActionCreators } from '../../redux/actions';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
@@ -11,6 +12,7 @@ import encrypt from '../../utils/encrypt';
 export default function Settings(props) {
   const { profileData } = props;
   const [selectedImage, setSelectedImage] = useState();
+  const [isUpdating, setIsUpdating] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
   const dispatch = useDispatch();
   const { SignInAction } = bindActionCreators(ActionCreators, dispatch);
@@ -24,21 +26,50 @@ export default function Settings(props) {
     }
   }
 
-  function saveHandler(data) {
+  const resizeFile = (file) => new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      1280,
+      1280,
+      'JPEG',
+      90,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      'base64',
+    );
+  });
+
+  const dataURIToBlob = (dataURI) => {
+    const splitDataURI = dataURI.split(',');
+    const byteString = splitDataURI[0].indexOf('base64') >= 0
+      ? atob(splitDataURI[1])
+      : decodeURI(splitDataURI[1]);
+    const mimeString = splitDataURI[0].split(':')[1].split(';')[0];
+    const ia = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
+    return new Blob([ia], { type: mimeString });
+  };
+
+  async function saveHandler(data) {
+    setIsUpdating(true);
     setIsUpdated(false);
     if (data.imageProfile.length > 0) {
-      const uploadImage = new FormData();
-      uploadImage.append('file', selectedImage, 'file');
-      imageUpload(uploadImage, data);
+      const resizedImage = await resizeFile(selectedImage);
+      const uploadImage = dataURIToBlob(resizedImage);
+      const imageForm = new FormData();
+      imageForm.append('file', uploadImage, 'file');
+      imageUpload(imageForm, data);
     } else {
       profileUpdate(data, undefined);
     }
   }
 
-  function imageUpload(imageToUpload, data) {
+  function imageUpload(imageForm, data) {
     axios({
       method: 'POST',
-      data: imageToUpload,
+      data: imageForm,
       url: `${process.env.REACT_APP_BASE_URL}/picture-upload`,
     }).then(async (res) => {
       profileUpdate(data, res.data.image);
@@ -68,6 +99,7 @@ export default function Settings(props) {
       SignInAction({
         userData: encrypt(payload),
       });
+      setIsUpdating(false);
       setIsUpdated(true);
     });
   }
@@ -154,7 +186,13 @@ export default function Settings(props) {
             </div>
           </div>
           <div className="flex flex-row-reverse items-center mt-4">
-            <input type="submit" value="Save" data-testid="save" className="cursor-pointer py-2 px-6 bg-black text-gray-100 rounded-lg transform transition duration-300 hover:text-white hover:bg-gray-900" />
+            {
+              isUpdating ? (
+                <p className="cursor-wait py-2 px-6 bg-black text-gray-100 rounded-lg">Saving...</p>
+              ) : (
+                <input type="submit" value="Save" data-testid="save" className="cursor-pointer py-2 px-6 bg-black text-gray-100 rounded-lg transform transition duration-300 hover:text-white hover:bg-gray-900" />
+              )
+            }
           </div>
         </form>
       </div>
