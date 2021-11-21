@@ -6,6 +6,7 @@ import OwnProfileArticleMapping from '../OwnProfileArticleMapping/OwnProfileArti
 import dateFormatter from '../../utils/dateFormatter';
 import urlTitle from '../../utils/urlTitle';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
+import placheHolderImage from '../../assets/images/placeholder-image.png';
 
 export default function ArticleMapping(props) {
   const {
@@ -20,11 +21,14 @@ export default function ArticleMapping(props) {
             <div className="mb-6" key={index}>
               <NavLink to={`/article/${urlTitle(items.articleTitle)}-${items._id}`}>
                 <LazyLoadImage
-                  src={`${items.imageCover}`}
-                  alt="Article"
                   effect="blur"
+                  src={items.imageCover}
+                  alt="Article"
+                  height="288px"
+                  width="384px"
                   key={index}
                   wrapperClassName="lazyload-article mb-2"
+                  placeholderSrc={placheHolderImage}
                 />
                 <p className="text-xl font-sans">{items.articleTitle}</p>
               </NavLink>
@@ -33,11 +37,14 @@ export default function ArticleMapping(props) {
                   to={`/${items.authorData.userName}`}
                 >
                   <LazyLoadImage
-                    src={`${items.authorData.imageProfile}`}
-                    alt="Author"
                     effect="blur"
+                    src={items.authorData.imageProfile}
+                    alt="Author"
+                    height="28px"
+                    width="28px"
                     key={index}
                     wrapperClassName="lazyload-author mr-3"
+                    placeholderSrc={placheHolderImage}
                   />
                 </NavLink>
                 <NavLink
@@ -68,11 +75,14 @@ export default function ArticleMapping(props) {
             <div className="mb-6" key={index}>
               <NavLink to={`/article/${urlTitle(items.articleTitle)}-${items._id}`}>
                 <LazyLoadImage
-                  src={`${items.imageCover}`}
-                  alt="Article"
                   effect="blur"
+                  src={items.imageCover}
+                  alt="Article"
+                  height="288px"
+                  width="384px"
                   key={index}
                   wrapperClassName="lazyload-article mb-2"
+                  placeholderSrc={placheHolderImage}
                 />
                 <p className="text-xl font-sans">{items.articleTitle}</p>
               </NavLink>
@@ -81,11 +91,14 @@ export default function ArticleMapping(props) {
                   to={`/${items.authorData.userName}`}
                 >
                   <LazyLoadImage
-                    src={`${items.authorData.imageProfile}`}
-                    alt="Author"
                     effect="blur"
+                    src={items.authorData.imageProfile}
+                    alt="Author"
+                    height="28px"
+                    width="28px"
                     key={index}
                     wrapperClassName="lazyload-author mr-3"
+                    placeholderSrc={placheHolderImage}
                   />
                 </NavLink>
                 <NavLink
@@ -122,22 +135,28 @@ export default function ArticleMapping(props) {
               <div className="mb-6" key={index}>
                 <NavLink to={`/article/${urlTitle(items.articleTitle)}-${items._id}`}>
                   <LazyLoadImage
-                    src={`${items.imageCover}`}
-                    alt="Article"
                     effect="blur"
+                    src={items.imageCover}
+                    alt="Article"
+                    height="288px"
+                    width="384px"
                     key={index}
                     wrapperClassName="lazyload-article mb-2"
+                    placeholderSrc={placheHolderImage}
                   />
                   <p className="text-xl font-sans">{items.articleTitle}</p>
                 </NavLink>
                 <div className="flex flex-row items-center mt-2">
                   <NavLink to={`/${items.authorData.userName}`}>
                     <LazyLoadImage
-                      src={`${items.authorData.imageProfile}`}
-                      alt="Author"
                       effect="blur"
+                      src={items.authorData.imageProfile}
+                      alt="Author"
+                      height="28px"
+                      width="28px"
                       key={index}
                       wrapperClassName="lazyload-author mr-3"
+                      placeholderSrc={placheHolderImage}
                     />
                   </NavLink>
                   <NavLink to={`/${items.authorData.userName}`} className="hover:underline">
@@ -157,6 +176,7 @@ export default function ArticleMapping(props) {
     if (ArticleData.length === 0) {
       return (
         <div className="w-full py-24">
+          <p className="text-center font-sans font-light text-lg">Wellcome, you haven't written any articles yet.</p>
           <NavLink to="/write" className="flex w-full">
             <p className="mx-auto font-sans font-light text-lg underline">Start Writing</p>
           </NavLink>

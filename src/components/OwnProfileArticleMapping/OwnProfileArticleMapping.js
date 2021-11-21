@@ -88,7 +88,7 @@ export default function OwnProfileArticleMapping(props) {
           </button>
           <div className={`${isPopperShow ? 'flex flex-col' : 'hidden'} font-sans font-light absolute -ml-9 mt-7 px-3 py-2 bg-white rounded ring-1 ring-gray-400`}>
             <button type="button" className="font-sans font-light mb-1" onClick={deletePost}>Delete</button>
-            <NavLink to={`/edit/${urlTitle(items.articleTitle)}`}>
+            <NavLink to={`/edit/${urlTitle(items.articleTitle)}-${items._id}`}>
               Edit
             </NavLink>
           </div>
