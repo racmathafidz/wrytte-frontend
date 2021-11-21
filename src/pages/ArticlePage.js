@@ -13,6 +13,7 @@ export default function ArticlePage() {
   const { articleTitle } = useParams();
   const [articleData, setArticleData] = useState();
   const [recomendation, setRecomendation] = useState();
+  const [forceFetch, setForceFetch] = useState(false);
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/api/article/${getArticleId(articleTitle)}`)
@@ -23,16 +24,17 @@ export default function ArticlePage() {
         if (response.data.articleTitle) {
           setArticleData(response.data);
           document.title = `${response.data.articleTitle} | Wrytte`;
+          setForceFetch(false);
         }
       });
-  }, [articleTitle]);
+  }, [articleTitle, forceFetch]);
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/api/article/recomendation`)
       .then((response) => {
         setRecomendation(response.data);
       });
-  }, [articleTitle]);
+  }, [articleTitle, forceFetch]);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -42,7 +44,7 @@ export default function ArticlePage() {
     return (
       <>
         <Header />
-        <Article article={articleData} recomendation={recomendation} />
+        <Article article={articleData} recomendation={recomendation} setForceFetch={setForceFetch} />
         <Footer />
       </>
     );
