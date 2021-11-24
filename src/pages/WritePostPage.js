@@ -18,16 +18,17 @@ import sendEmail from '../utils/sendEmail';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 export default function WritePostPage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { SignOutAction } = bindActionCreators(ActionCreators, dispatch);
   const encryptedState = useSelector((state) => state);
   const userDataState = encryptedState.UserData.userData ? decrypt(encryptedState.UserData.userData) : encryptedState.UserData;
-  const history = useHistory();
   const [rows, setRows] = useState(3);
   const [profileData, setProfileData] = useState();
   const [selectedImage, setSelectedImage] = useState();
   const [convertedContent, setConvertedContent] = useState(null);
   const [isPublishing, setIsPublishing] = useState(false);
+  const [dataForm, setDataForm] = useState();
   const [editorState, setEditorState] = useState(
     () => EditorState.createEmpty(),
   );
@@ -111,16 +112,31 @@ export default function WritePostPage() {
     return new Blob([ia], { type: mimeString });
   };
 
-  async function publishHandler(data) {
+  async function getUserData(data) {
     setIsPublishing(true);
+    axios.get(`${process.env.REACT_APP_BASE_URL}/api/account/${userDataState.userName}`)
+      .then((response) => {
+        if (response.data.msg) {
+          SignOutAction();
+          history.push('/signup');
+        }
+        if (response.data.profileData) {
+          setDataForm(title);
+          setProfileData(response.data);
+          publishHandler(data);
+        }
+      });
+  }
+
+  async function publishHandler(data) {
     const resizedImage = await resizeFile(selectedImage);
     const uploadImage = dataURIToBlob(resizedImage);
     const imageForm = new FormData();
     imageForm.append('file', uploadImage, 'file');
-    imageUpload(imageForm, data);
+    imageUpload(data, imageForm);
   }
 
-  function imageUpload(imageForm, data) {
+  function imageUpload(data, imageForm) {
     axios({
       method: 'POST',
       data: imageForm,
@@ -131,7 +147,6 @@ export default function WritePostPage() {
   }
 
   function publishArticle(data, imageCover) {
-    console.log(profileData);
     const articleBody = convertedContent === null ? '<p></p>' : convertedContent;
     axios({
       method: 'POST',
@@ -178,7 +193,7 @@ export default function WritePostPage() {
 
   return (
     <div className="container mx-auto px-4 sm:px-20 lg:px-32 xl:px-52 flex flex-col pt-12 sm:pt-16 xl:pt-20 pb-8 font-serif">
-      <form onSubmit={handleSubmit(publishHandler)}>
+      <form onSubmit={handleSubmit(getUserData)}>
         <textarea
           name="title"
           id="title"
