@@ -5,5 +5,5 @@ export default function dateFormatter(rawDate) {
   const date = dateArray[0];
   const month = months[dateArray[1] - 1];
   const year = dateArray[2];
-  return `${date} ${month} ${year}`;
+  return `${month} ${date} ${year}`;
 }
