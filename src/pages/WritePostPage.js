@@ -5,10 +5,12 @@ import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import Resizer from 'react-image-file-resizer';
 
+import { ActionCreators } from '../redux/actions';
 import Toolbar from '../utils/toolbar';
 import decrypt from '../utils/decrypt';
 import urlTitle from '../utils/urlTitle';
@@ -16,10 +18,13 @@ import sendEmail from '../utils/sendEmail';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 export default function WritePostPage() {
+  const dispatch = useDispatch();
+  const { SignOutAction } = bindActionCreators(ActionCreators, dispatch);
   const encryptedState = useSelector((state) => state);
   const userDataState = encryptedState.UserData.userData ? decrypt(encryptedState.UserData.userData) : encryptedState.UserData;
   const history = useHistory();
   const [rows, setRows] = useState(3);
+  const [profileData, setProfileData] = useState();
   const [selectedImage, setSelectedImage] = useState();
   const [convertedContent, setConvertedContent] = useState(null);
   const [isPublishing, setIsPublishing] = useState(false);
@@ -126,6 +131,7 @@ export default function WritePostPage() {
   }
 
   function publishArticle(data, imageCover) {
+    console.log(profileData);
     const articleBody = convertedContent === null ? '<p></p>' : convertedContent;
     axios({
       method: 'POST',
@@ -133,8 +139,8 @@ export default function WritePostPage() {
         imageCover,
         articleTitle: data.title,
         articleBody,
-        authorId: userDataState.id,
-        authorData: userDataState.id,
+        authorId: profileData.profileData._id,
+        authorData: profileData.profileData._id,
       },
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/article/new-article`,
@@ -149,6 +155,19 @@ export default function WritePostPage() {
   function goBack() {
     history.goBack();
   }
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/api/account/${userDataState.userName}`)
+      .then((response) => {
+        if (response.data.msg) {
+          SignOutAction();
+          history.push('/signup');
+        }
+        if (response.data.profileData) {
+          setProfileData(response.data);
+        }
+      });
+  }, []);
 
   useEffect(() => {
     document.title = 'Write | Wrytte';
