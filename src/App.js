@@ -18,6 +18,7 @@ import SettingsPage from './pages/SettingsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { ActionCreators } from './redux/actions';
 import encrypt from './utils/encrypt';
+import capitalize from './utils/capitalize';
 
 export const AuthContext = React.createContext();
 
@@ -28,11 +29,6 @@ function App() {
   const [signUpResponse, setSignUpResponse] = useState();
   const [signInResponse, setSignInResponse] = useState();
   const [isLoading, setIsLoading] = useState(false);
-
-  function capitalize(string) {
-    const lower = string.toLowerCase();
-    return string.charAt(0).toUpperCase() + lower.slice(1);
-  }
 
   function AuthGoogle(googleData) {
     axios({
