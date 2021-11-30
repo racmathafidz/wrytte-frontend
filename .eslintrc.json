@@ -47,6 +47,7 @@
       "react/no-array-index-key": "off",
       "import/prefer-default-export": "off",
       "no-nested-ternary": "off",
-      "no-plusplus": "off"
+      "no-plusplus": "off",
+      "consistent-return": "off"
     } 
 }
