@@ -85,6 +85,12 @@ h6 {
   font-weight: bold;
 }
 
+code {
+  display: block;
+  background: #F1F1F1;
+  padding: 4px 8px;  
+}
+
 .signup-or, 
 .signin-or {
    line-height: 0.1em;
