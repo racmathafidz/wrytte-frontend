@@ -72,7 +72,25 @@ export default function EditPostPage() {
   }
 
   function convertContentToHTML() {
-    const currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
+    const currentContentAsHTML = convertToHTML({
+      blockToHTML: (block) => {
+        if (block.type === 'PARAGRAPH') {
+          return <p />;
+        }
+        if (block.type === 'code') {
+          return <code>{block.text}</code>;
+        }
+      },
+      entityToHTML: (entity, originalText) => {
+        if (entity.type === 'LINK') {
+          return <a href={entity.data.url} target="_blank" style={{ textDecorationLine: 'underline' }} rel="noreferrer">{originalText}</a>;
+        }
+        if (entity.type === 'IMAGE') {
+          return `<img src="${entity.data.src}" />`;
+        }
+        return originalText;
+      },
+    })(editorState.getCurrentContent());
     setConvertedContent(currentContentAsHTML);
   }
 
