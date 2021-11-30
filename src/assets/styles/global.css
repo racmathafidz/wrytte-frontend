@@ -91,6 +91,11 @@ code {
   padding: 4px 8px;  
 }
 
+figure {
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+}
+
 .signup-or, 
 .signin-or {
    line-height: 0.1em;
