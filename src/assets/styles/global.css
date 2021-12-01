@@ -96,6 +96,12 @@ figure {
   margin-bottom: 0.67em;
 }
 
+figure > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .signup-or, 
 .signin-or {
    line-height: 0.1em;
