@@ -112,7 +112,7 @@ export default function Article(props) {
           effect="blur"
           wrapperClassName="my-9 mx-auto"
         />
-        <div className="font-serif font-light text-md lg:text-lg text-justify leading-normal text-black">
+        <div className="font-serif font-light text-md lg:text-lg text-justify leading-relaxed text-black">
           {stringToHtml(article.articleBody)}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-16">
