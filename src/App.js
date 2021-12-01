@@ -18,7 +18,7 @@ import SettingsPage from './pages/SettingsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { ActionCreators } from './redux/actions';
 import encrypt from './utils/encrypt';
-import capitalize from './utils/capitalize';
+import capitalizeFirstLetter from './utils/capitalizeFirstLetter';
 
 export const AuthContext = React.createContext();
 
@@ -69,7 +69,7 @@ function App() {
   }
 
   function signUpLocal(email, password, firstName, lastName) {
-    const fullName = `${capitalize(firstName)} ${capitalize(lastName)}`;
+    const fullName = capitalizeFirstLetter(`${firstName} ${lastName}`);
     setIsLoading(true);
     axios({
       method: 'POST',
