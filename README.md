@@ -2,7 +2,7 @@
 ![alt text](https://github.com/racmathafidz/wrytte-frontend/blob/main/public/assets/images/screely.png)
 
 ### About
-Open writing or blogging platform inspired by medium.com:newspaper:.\
+Open writing or blogging platform inspired by medium.com where everyone can write, read and share:newspaper:.\
 Built with ReactJS, TailwindCSS, and Redux.\
 Frontend/client side of [**Wrytte Backend**](https://github.com/racmathafidz/wrytte-backend).
 
