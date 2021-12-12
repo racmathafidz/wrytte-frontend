@@ -199,6 +199,12 @@ export default function EditPostPage() {
   }, []);
 
   if (articleData) {
+    if (articleData.authorData._id !== userDataState.id) {
+      return (
+        <NotFoundPage />
+      );
+    }
+
     return (
       <div className="container mx-auto px-4 sm:px-20 lg:px-32 xl:px-52 flex flex-col pt-12 sm:pt-16 xl:pt-20 pb-8 font-serif">
         <form onSubmit={handleSubmit(publishHandler)}>
