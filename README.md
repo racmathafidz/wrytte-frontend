@@ -2,7 +2,7 @@
 ![alt text](https://github.com/racmathafidz/wrytte-frontend/blob/main/public/assets/images/screely.png)
 
 ### About
-Open writing or blogging platform inspired by medium.com where everyone can write, read and share:newspaper:.\
+Open writing or blogging platform inspired by [**medium.com**](https://medium.com) where everyone can write, read and share :newspaper:.\
 Built with ReactJS, TailwindCSS, and Redux.\
 Frontend/client side of [**Wrytte Backend**](https://github.com/racmathafidz/wrytte-backend).
 
@@ -10,7 +10,7 @@ Frontend/client side of [**Wrytte Backend**](https://github.com/racmathafidz/wry
 - [**ReactJS**](https://github.com/facebook/create-react-app)
 - [**PostCSS**](https://postcss.org/)
 - [**TailwindCSS**](https://tailwindcss.com/)
-- [**Netlify**](https://netlify.com/)
+- [**Vercel**](https://vercel.com/)
 
 ### Library
 - [**axios**](https://github.com/axios/axios) : HTTP requests
@@ -33,7 +33,7 @@ Frontend/client side of [**Wrytte Backend**](https://github.com/racmathafidz/wry
 - [**emailjs-com**](https://www.npmjs.com/package/emailjs-com) : Send emails from client side
 
 ### Demo
-**Demo :** https://wrytte.netlify.app/
+**Demo :** [**wrytte.vercel.app**](https://wrytte.vercel.app/)
 
 ### Available Scripts
 
